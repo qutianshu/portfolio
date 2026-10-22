@@ -1,606 +1,823 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>曲天舒 · AI 产品经理作品集</title>
-<meta name="description" content="曲天舒 — 深圳大学人工智能专业 2028 届，两段 AI 产品实习，主攻 AI 产品经理。把 LLM 能力拆成流程、评成指标、落成产品。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1411'/%3E%3Cpath d='M9 9h14v3H13v3h8v3h-8v4h10v3H9z' fill='%23D6F957'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://miaoda.feishu.cn">
-<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap">
-<style>
-:root{
-  --bg:#0B1411; --panel:#0E1A16; --panel-2:#121F1B; --line:#22332E;
-  --ink:#EAFFF6; --muted:#8FA39C;
-  --accent:#D6F957; --green:#97C459; --amber:#EF9F27; --red:#E24B4A;
-  --mono:"SFMono-Regular",Consolas,"Cascadia Code","JetBrains Mono","Roboto Mono",monospace;
-  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
-::selection{background:var(--accent);color:#0B1411}
-img{max-width:100%;display:block}
-a{color:var(--green)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.container{width:min(1180px,100% - 40px);margin-inline:auto}
-.mono{font-family:var(--mono);font-feature-settings:"tnum"}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>曲天舒 - AI 产品作品集</title>
+  <meta name="description" content="曲天舒 AI 产品经理个人作品集，展示 AI Workflow、LLM 应用、RAG 与评测设计等产品经验。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2310201d'/%3E%3Ctext x='9' y='22' font-family='Arial,sans-serif' font-size='13' font-weight='800' fill='%23ffffff'%3EQS%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://miaoda.feishu.cn">
+  <link href="https://miaoda.feishu.cn/fonts/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7fbf8;
+      --surface: #ffffff;
+      --surface-soft: #eef7f3;
+      --ink: #10201d;
+      --muted: #61716d;
+      --line: rgba(16, 32, 29, 0.12);
+      --teal: #087f73;
+      --teal-dark: #075f58;
+      --mint: #bcf4d6;
+      --lime: #d6f957;
+      --coral: #ff7a5c;
+      --blue: #3366ff;
+      --shadow: 0 24px 70px rgba(16, 32, 29, 0.10);
+      --radius: 8px;
+      --mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", monospace;
+    }
 
-/* ===== 顶部导航 ===== */
-.nav{position:sticky;top:0;z-index:50;background:rgba(11,20,17,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:10px 18px;flex-wrap:wrap;padding:14px 0}
-.brand{font-family:var(--mono);color:var(--accent);font-weight:700;font-size:18px;text-decoration:none}
-.brand::before{content:"> ";color:var(--muted)}
-.nav-links{display:flex;gap:6px 18px;flex-wrap:wrap}
-.nav-links a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none;padding:4px 2px}
-.nav-links a::before{content:"./";color:var(--accent);opacity:.55}
-.nav-links a:hover{color:var(--accent)}
+    * { box-sizing: border-box; }
 
-/* ===== Hero ===== */
-.hero{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:url("assets/hero-bg.png") center 30%/cover no-repeat;filter:saturate(.55) brightness(.62)}
-.hero::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(11,20,17,.72) 0%,rgba(11,20,17,.55) 32%,rgba(11,20,17,.88) 74%,var(--bg) 100%),
-  linear-gradient(rgba(214,249,87,.035) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(214,249,87,.035) 1px,transparent 1px);
-  background-size:auto,34px 34px,34px 34px}
-.hero-grid{position:relative;z-index:1;display:grid;gap:30px;padding:68px 0 34px}
-.eyebrow{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;color:var(--green);margin:0 0 18px}
-.pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 2.2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(214,249,87,0)}100%{box-shadow:0 0 0 0 rgba(214,249,87,0)}}
-.hero-title{font-size:33px;line-height:1.28;margin:0 0 18px;font-weight:700}
-.hero-title .cursor{color:var(--accent);animation:blink 1.1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.hero-lead{color:var(--muted);font-size:15px;line-height:1.85;margin:0 0 24px;max-width:600px}
-.hero-lead strong{color:var(--ink);font-weight:500}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    html { scroll-behavior: smooth; }
 
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:14px;padding:11px 18px;border-radius:8px;text-decoration:none;border:1px solid var(--line);cursor:pointer;transition:border-color .16s ease,background-color .16s ease,color .16s ease}
-.btn-primary{background:var(--accent);color:#0B1411;border-color:var(--accent);font-weight:700}
-.btn-primary:hover{background:#E5FB85}
-.btn-ghost{color:var(--ink);background:transparent}
-.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn-sm{padding:7px 13px;font-size:12px}
-.btn-lg{padding:14px 24px;font-size:15px}
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(8, 127, 115, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(8, 127, 115, 0.05) 1px, transparent 1px),
+        var(--bg);
+      background-size: 34px 34px;
+      font-family: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
 
-/* ===== 指标条 ===== */
-.metrics{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 60px}
-.metric{background:rgba(14,26,22,.92);padding:18px 20px;display:flex;flex-direction:column;gap:7px}
-.metric-n{font-size:28px;font-weight:700;color:var(--accent);font-family:var(--mono);line-height:1}
-.metric-l{font-size:13px;color:var(--muted)}
+    ::selection { color: var(--ink); background: var(--lime); }
+    :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
 
-/* ===== 终端面板 ===== */
-.console{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.console-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--panel-2);border-bottom:1px solid var(--line)}
-.dot{width:10px;height:10px;border-radius:50%;background:#3B4B45}
-.console-title{margin-left:8px;color:var(--muted);font-size:12px}
-.console-body{padding:16px;display:flex;flex-direction:column;gap:13px}
-.console-line{font-family:var(--mono);font-size:13px;color:var(--ink);display:flex;gap:8px;flex-wrap:wrap}
-.k{color:var(--green)}
-.v{color:var(--ink)}
-.signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.signal{background:var(--panel);padding:11px 12px;display:flex;flex-direction:column;gap:3px}
-.signal-k{font-size:10px;color:var(--muted);font-family:var(--mono)}
-.signal-v{font-size:14px;color:var(--ink);font-weight:500}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font-family:var(--mono);font-size:11px;color:var(--green);border:1px solid var(--line);border-radius:999px;padding:3px 10px;background:var(--panel-2)}
+    .site-shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 
-/* ===== 分区通用 ===== */
-.section{padding:66px 0;scroll-margin-top:74px}
-.section+.section{border-top:1px solid var(--line)}
-.section-header{max-width:820px}
-.kicker{font-family:var(--mono);font-size:13px;color:var(--accent);margin:0 0 12px}
-.kicker::before{content:"$ ";color:var(--muted)}
-.section-header h2{font-size:27px;margin:0 0 12px}
-.section-desc{color:var(--muted);max-width:580px;font-size:14px;line-height:1.75;margin:0}
-/* ===== 项目案例卡片 ===== */
-.case-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-top:38px}
-.case-head{width:100%;text-align:left;background:none;border:none;padding:26px 60px 26px 26px;cursor:pointer;position:relative;display:block;font:inherit;color:inherit}
-.case-head:hover h3{color:var(--accent)}
-.case-meta{font-family:var(--mono);font-size:11px;color:var(--accent);margin:0 0 10px;letter-spacing:.4px}
-.case-head h3{font-size:21px;margin:0 0 10px;transition:color .16s ease}
-.case-summary{color:var(--muted);font-size:14px;line-height:1.8;margin:0 0 14px;max-width:760px}
-.case-tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.tag{font-family:var(--mono);font-size:11px;color:var(--green);border:1px solid var(--line);border-radius:6px;padding:3px 9px;background:var(--panel-2)}
-.case-toggle{position:absolute;top:24px;right:22px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:6px;color:var(--accent);font-size:17px;transition:transform .2s ease;background:var(--panel-2)}
-.case-card.is-open .case-toggle{transform:rotate(45deg)}
-.case-body{display:none;padding:26px;border-top:1px solid var(--line)}
-.case-card.is-open .case-body{display:block;animation:fadein .28s ease}
-@keyframes fadein{from{opacity:0}to{opacity:1}}
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      padding: 14px 0;
+      background: rgba(247, 251, 248, 0.86);
+      border-bottom: 1px solid rgba(16, 32, 29, 0.08);
+      backdrop-filter: blur(16px);
+    }
 
-/* ===== Pipeline 可视化 ===== */
-.case-vis{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:26px;background:var(--bg)}
-.panel-title{padding:10px 14px;background:var(--panel-2);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
-.pipeline{padding:14px;display:flex;flex-direction:column;gap:6px}
-.stage-label{font-family:var(--mono);font-size:11px;color:var(--amber);margin:10px 0 4px;border-top:1px dashed var(--line);padding-top:12px}
-.stage-label:first-of-type{border-top:none;margin-top:0;padding-top:0}
-.pnode{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer;font:inherit;transition:border-color .15s ease,background-color .15s ease}
-.pnode:hover{border-color:var(--green)}
-.pnode.is-active{border-color:var(--accent);background:var(--panel-2)}
-.pn{color:var(--accent);font-family:var(--mono);font-size:12px;min-width:22px}
-.pname{font-family:var(--mono);font-size:13px;color:var(--ink);flex:1;min-width:0}
-.pm{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
-.pnode-detail{font-family:var(--mono);font-size:12px;color:var(--green);background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px;margin-top:4px;line-height:1.65}
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px;
+      width: min(1180px, calc(100% - 40px)); margin: 0 auto;
+    }
 
-/* ===== Tab ===== */
-.tabs{display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--line);margin:0 0 20px}
-.tab-btn{font-family:var(--mono);font-size:13px;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:9px 13px;cursor:pointer;margin-bottom:-1px;transition:color .15s ease,border-color .15s ease}
-.tab-btn:hover{color:var(--ink)}
-.tab-btn.is-active{color:var(--accent);border-bottom-color:var(--accent)}
-.tab-pane{display:none}
-.tab-pane.is-active{display:block;animation:fadein .2s ease}
-.tab-pane p{color:var(--muted);font-size:14px;line-height:1.85;margin:0 0 10px}
-.tab-pane strong{color:var(--ink)}
-.tab-pane ul{margin:0 0 8px;padding-left:20px;color:var(--muted);font-size:14px;line-height:1.85}
-.tab-pane li{margin-bottom:6px}
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; white-space: nowrap; }
 
-/* ===== 运行证据 ===== */
-.proof{display:grid;gap:16px;margin-top:24px}
-.proof figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg)}
-.proof img{width:100%}
-.proof figcaption{font-size:11px;color:var(--muted);padding:9px 12px;border-top:1px solid var(--line);background:var(--panel)}
+    .brand-mark {
+      display: grid; width: 34px; height: 34px; place-items: center;
+      color: #ffffff; background: var(--ink);
+      border-radius: var(--radius);
+      font-size: 13px; font-weight: 800;
+    }
 
-/* ===== 能力地图 ===== */
-.cap-grid{display:grid;gap:16px;margin-top:38px}
-.cap-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:10px;transition:border-color .16s ease}
-.cap-card:hover{border-color:var(--green)}
-.cap-n{font-family:var(--mono);font-size:12px;color:var(--accent)}
-.cap-card h3{font-size:17px;margin:0}
-.cap-card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
-.cap-tags{font-size:11px;color:var(--green);margin-top:auto;line-height:1.6}
+    .nav-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 
-/* ===== 经历 ===== */
-.exp-wrap{display:grid;gap:34px;margin-top:38px}
-.timeline{display:flex;flex-direction:column;margin:0;padding:0}
-.tl-item{display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:16px;padding-bottom:32px}
-.tl-item:last-child{padding-bottom:0}
-.tl-axis{position:relative}
-.tl-axis::before{content:"";position:absolute;left:50%;top:12px;bottom:-32px;width:1px;background:var(--line);transform:translateX(-50%)}
-.tl-item:last-child .tl-axis::before{display:none}
-.tl-dot{width:13px;height:13px;border-radius:50%;background:var(--accent);position:absolute;left:50%;top:7px;transform:translateX(-50%);box-shadow:0 0 0 3px rgba(214,249,87,.14)}
-.tl-time{font-family:var(--mono);font-size:12px;color:var(--amber);margin:0 0 6px}
-.tl-role{font-size:16px;font-weight:700;margin:0 0 4px}
-.tl-org{font-size:12px;color:var(--green);font-family:var(--mono);margin:0 0 8px}
-.tl-desc{color:var(--muted);font-size:13px;line-height:1.8;margin:0}
-.evidence-map{background:#0C1915;border:1px solid var(--line);border-radius:12px;padding:24px}
-.em-title{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 18px}
-.em-title::before{content:"> ";color:var(--accent)}
-.em-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.em-cluster{border:1px solid var(--line);border-radius:8px;padding:14px;background:var(--panel)}
-.em-cluster h4{font-family:var(--mono);font-size:11px;color:var(--amber);margin:0 0 8px;word-break:break-all}
-.em-cluster p{color:var(--ink);font-size:13px;line-height:1.65;margin:0}
+    .nav-links a, .button-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 36px; padding: 8px 12px;
+      border: 1px solid transparent; border-radius: var(--radius);
+      color: var(--muted); font-size: 14px; font-weight: 700;
+      transition: 160ms ease;
+    }
 
-/* ===== 紧凑简历 ===== */
-.resume-grid{display:grid;gap:16px;margin-top:38px}
-.resume-block{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}
-.resume-block h3{font-family:var(--mono);font-size:12px;color:var(--accent);margin:0 0 12px}
-.resume-block p{color:var(--ink);font-size:14px;line-height:1.75;margin:0}
-.resume-block .sub{color:var(--muted);font-size:12px;font-family:var(--mono);margin-top:10px}
+    .nav-links a:hover, .button-link:hover {
+      color: var(--ink);
+      background: rgba(8, 127, 115, 0.08);
+      border-color: rgba(8, 127, 115, 0.18);
+    }
 
-/* ===== 联系 ===== */
-.contact-panel{background:#0C1915;border:1px solid var(--line);border-radius:14px;padding:52px 28px 44px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
-.contact-panel h2{font-size:29px;margin:0}
-.contact-sub{color:var(--muted);font-size:14px;margin:0}
-.footer-note{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin:26px 0 0;padding-bottom:44px}
+    .button-link { color: #ffffff; background: var(--ink); border-color: var(--ink); }
 
-/* ===== 入场动画 ===== */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
-.reveal.in{opacity:1;transform:none}
+    .button-link:hover {
+      color: #ffffff; background: var(--teal-dark); border-color: var(--teal-dark);
+      transform: translateY(-1px);
+    }
 
-/* ===== 响应式 ===== */
-@media (min-width:768px){
-  .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);align-items:center;padding:84px 0 38px}
-  .hero-title{font-size:45px}
-  .metrics{grid-template-columns:repeat(4,1fr)}
-  .hero-title{font-size:45px}
-  .section{padding:84px 0}
-  .section-header h2{font-size:32px}
-  .proof{grid-template-columns:1fr 1fr}
-  .cap-grid{grid-template-columns:repeat(2,1fr)}
-  .resume-grid{grid-template-columns:repeat(2,1fr)}
-  .case-body{padding:30px}
-  .case-head{padding:30px 64px 30px 30px}
-  .case-head h3{font-size:24px}
-}
-@media (min-width:1024px){
-  .hero-title{font-size:54px}
-  .cap-grid{grid-template-columns:repeat(4,1fr)}
-  .exp-wrap{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:44px;align-items:start}
-}
-@media (max-width:380px){
-  .metric-n{font-size:23px}
-  .metrics{margin-bottom:48px}
-}
+    main { padding: 34px 0 72px; }
 
-/* ===== 打印 ===== */
-@media print{
-  body{background:#fff !important;color:#111 !important}
-  .nav,.console,.proof,.case-toggle,.case-body,.footer-note,.hero::before,.hero::after{display:none !important}
-  .hero{border:none;overflow:visible}
-  .hero-grid{padding:0}
-  .metrics{background:#e8e8e8;border-color:#bbb}
-  .metric{background:#fff}
-  .section,.case-card,.cap-card,.resume-block,.contact-panel,.evidence-map{background:#fff !important;border-color:#ccc !important;box-shadow:none !important;color:#111 !important}
-  .section+.section{border-color:#ddd}
-  .metric-n,.kicker,.tl-time,.tl-org,.em-cluster h4,.cap-n,.resume-block h3,.case-meta,.tab-btn{color:#0a7a33 !important}
-  .case-head h3,.hero-title,.contact-panel h2,.resume-block p,.em-cluster p{color:#111 !important}
-  .case-summary,.hero-lead,.section-desc,.metric-l,.tab-pane p,.tl-desc,.cap-card p,.contact-sub,.section-header h2{color:#333 !important}
-  .tab-pane.is-active{display:block}
-  .reveal{opacity:1;transform:none}
-  .hero-cta a{color:#045 !important}
-  a{text-decoration:none}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none;transition:none}
-  .pulse,.hero-title .cursor{animation:none}
-}
-</style>
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 28px;
+      min-height: 610px;
+      align-items: stretch;
+    }
+
+    .hero-copy, .ai-console {
+      border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(255, 255, 255, 0.80);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy { display: flex; flex-direction: column; justify-content: space-between; padding: 44px; }
+
+    .eyebrow {
+      display: inline-flex; width: fit-content; align-items: center; gap: 10px;
+      margin: 0 0 22px; padding: 6px 10px;
+      border: 1px solid rgba(8, 127, 115, 0.20); border-radius: var(--radius);
+      color: var(--teal-dark); background: rgba(188, 244, 214, 0.42);
+      font-family: var(--mono); font-size: 12px; font-weight: 700;
+    }
+
+    .pulse { width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 6px rgba(214, 249, 87, 0.22); }
+
+    h1, h2, h3 { margin: 0; letter-spacing: 0; line-height: 1.12; }
+
+    h1 { max-width: 820px; font-size: 58px; font-weight: 800; }
+
+    .hero-lead { max-width: 720px; margin: 24px 0 0; color: var(--muted); font-size: 18px; }
+    .hero-lead strong { color: var(--ink); font-weight: 800; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+    .ghost-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 42px; padding: 10px 14px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: #ffffff; color: var(--ink); font-weight: 800;
+      transition: 160ms ease;
+    }
+
+    .ghost-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(8, 127, 115, 0.34);
+      background: var(--surface-soft);
+    }
+
+    .hero-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+
+    .metric {
+      min-height: 104px; padding: 16px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff, #f3faf6);
+    }
+
+    .metric b { display: block; font-size: 28px; line-height: 1; }
+    .metric span { display: block; margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+    .ai-console { display: flex; flex-direction: column; background: #0d1c19; color: #eafff6; }
+
+    .console-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      color: rgba(234, 255, 246, 0.72);
+      font-family: var(--mono); font-size: 12px;
+    }
+
+    .console-dots { display: inline-flex; gap: 7px; }
+    .console-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--coral); }
+    .console-dots i:nth-child(2) { background: var(--lime); }
+    .console-dots i:nth-child(3) { background: var(--mint); }
+
+    .profile-widget {
+      display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: center;
+      padding: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .profile-widget img {
+      width: 92px; height: 116px; object-fit: cover;
+      border: 2px solid rgba(188, 244, 214, 0.56); border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .profile-widget h2 { font-size: 28px; font-weight: 800; }
+    .profile-widget p { margin: 8px 0 0; color: rgba(234, 255, 246, 0.72); font-size: 14px; }
+
+    .signal-panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 22px; }
+
+    .signal {
+      min-height: 120px; padding: 15px;
+      border: 1px solid rgba(188, 244, 214, 0.22); border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .signal strong { display: block; color: var(--lime); font-family: var(--mono); font-size: 13px; }
+    .signal span { display: block; margin-top: 10px; color: rgba(234, 255, 246, 0.78); font-size: 14px; }
+
+    .pipeline-strip { display: flex; gap: 8px; padding: 0 22px 22px; flex-wrap: wrap; }
+
+    .pipeline-chip {
+      flex: 1 1 auto; min-width: 92px; padding: 10px;
+      border: 1px solid rgba(214, 249, 87, 0.28); border-radius: var(--radius);
+      color: var(--lime); background: rgba(214, 249, 87, 0.08);
+      font-family: var(--mono); font-size: 12px; text-align: center;
+    }
+
+    .section {
+      margin-top: 34px; padding: 36px;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 18px 48px rgba(16, 32, 29, 0.07);
+    }
+
+    .section-header {
+      display: flex; align-items: end; justify-content: space-between; gap: 28px;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker { display: block; margin-bottom: 8px; color: var(--teal); font-family: var(--mono); font-size: 12px; font-weight: 800; }
+
+    h2 { font-size: 34px; font-weight: 800; }
+
+    .section-header p { max-width: 520px; margin: 0; color: var(--muted); }
+
+    .capability-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .capability {
+      min-height: 222px; padding: 20px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff, #f3faf6);
+      transition: 180ms ease;
+    }
+
+    .capability:hover { transform: translateY(-3px); border-color: rgba(8, 127, 115, 0.32); box-shadow: 0 18px 38px rgba(16, 32, 29, 0.08); }
+
+    .capability-num { color: var(--teal); font-family: var(--mono); font-size: 12px; font-weight: 800; }
+    .capability h3 { margin-top: 18px; font-size: 22px; }
+    .capability p { margin: 12px 0 0; color: var(--muted); font-size: 15px; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+    .tag {
+      display: inline-flex; align-items: center; min-height: 28px; padding: 5px 9px;
+      border: 1px solid rgba(8, 127, 115, 0.18); border-radius: var(--radius);
+      color: var(--teal-dark); background: rgba(188, 244, 214, 0.34);
+      font-size: 12px; font-weight: 800;
+    }
+
+    .work-map { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr); gap: 22px; align-items: start; }
+
+    .journey { display: grid; gap: 14px; }
+
+    .journey-item {
+      position: relative; padding: 18px 18px 18px 22px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: #ffffff;
+    }
+
+    .journey-item::before {
+      content: ""; position: absolute; left: -1px; top: 18px; bottom: 18px; width: 4px;
+      border-radius: 0 6px 6px 0; background: var(--teal);
+    }
+
+    .journey-item h3 { font-size: 20px; }
+    .journey-time { color: var(--teal); font-family: var(--mono); font-size: 12px; font-weight: 800; }
+    .journey-item p { margin: 8px 0 0; color: var(--muted); }
+
+    .evidence-map { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #0d1c19; color: #eafff6; }
+
+    .map-title {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px;
+      font-family: var(--mono); font-size: 12px; color: rgba(234, 255, 246, 0.74);
+    }
+
+    .map-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+    .map-node {
+      min-height: 116px; padding: 14px;
+      border: 1px solid rgba(188, 244, 214, 0.20); border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .map-node b { color: var(--lime); }
+    .map-node span { display: block; margin-top: 8px; color: rgba(234, 255, 246, 0.72); font-size: 13px; }
+
+    .case-stack { display: grid; gap: 18px; }
+
+    .case-card {
+      border: 1px solid var(--line); border-radius: 10px;
+      background: #ffffff; overflow: hidden;
+      transition: 180ms ease;
+    }
+
+    .case-card:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(16, 32, 29, 0.10); border-color: rgba(8, 127, 115, 0.28); }
+
+    .case-head {
+      display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(340px, 1.05fr);
+      gap: 22px; padding: 22px; cursor: pointer;
+    }
+
+    .case-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+    .case-meta span {
+      min-height: 28px; padding: 5px 9px; border-radius: var(--radius);
+      background: var(--surface-soft); color: var(--teal-dark);
+      font-family: var(--mono); font-size: 12px; font-weight: 800;
+    }
+
+    .case-title-row { display: flex; align-items: start; justify-content: space-between; gap: 14px; }
+    .case-title-row h3 { font-size: 28px; }
+
+    .expand-icon {
+      display: grid; flex: 0 0 36px; width: 36px; height: 36px; place-items: center;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: #ffffff; color: var(--teal); font-weight: 800;
+      transition: 160ms ease;
+    }
+
+    .case-card.is-open .expand-icon { color: var(--ink); background: var(--lime); transform: rotate(45deg); }
+
+    .case-summary { margin: 14px 0 0; color: var(--muted); }
+
+    .visual {
+      min-height: 260px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(135deg, #f6fbf8, #e6f6ee);
+      overflow: hidden;
+    }
+
+    .visual-title {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border-bottom: 1px solid var(--line);
+      color: var(--muted); font-family: var(--mono); font-size: 12px; font-weight: 800;
+    }
+
+    .visual-body { min-height: 212px; padding: 18px; }
+
+    .flow-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+
+    .flow-step {
+      display: grid; min-height: 74px; align-content: center; padding: 12px;
+      border: 1px solid rgba(8, 127, 115, 0.20); border-radius: var(--radius);
+      background: #ffffff; cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .flow-step:hover, .flow-step.is-active { transform: translateY(-2px); border-color: var(--teal); background: #f4fff8; }
+    .flow-step.is-active { background: rgba(188, 244, 214, 0.55); }
+    .flow-step b { font-size: 14px; }
+    .flow-step span { margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+
+    .flow-detail {
+      margin-top: 12px; min-height: 40px; padding: 10px 12px;
+      border: 1px dashed rgba(8, 127, 115, 0.30); border-radius: var(--radius);
+      background: #ffffff; color: var(--muted);
+      font-family: var(--mono); font-size: 12px; line-height: 1.5;
+    }
+
+    .case-body { display: none; padding: 0 22px 22px; }
+    .case-card.is-open .case-body { display: block; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 18px; border-top: 1px solid var(--line); }
+
+    .tab-button {
+      min-height: 36px; padding: 8px 12px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      color: var(--muted); background: #ffffff; font-weight: 800; cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .tab-button:hover, .tab-button.is-active { color: var(--ink); border-color: rgba(8, 127, 115, 0.28); background: var(--surface-soft); }
+
+    .tab-panel {
+      display: none; margin-top: 14px; padding: 18px;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: #f8fcf9; color: var(--muted);
+    }
+
+    .tab-panel.is-active { display: block; }
+    .tab-panel strong { color: var(--ink); }
+
+    .proof-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+
+    .proof-figure { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #ffffff; }
+
+    .proof-figure img { width: 100%; display: block; }
+    .proof-figure figcaption { padding: 8px 12px; border-top: 1px solid var(--line); color: var(--muted); font-family: var(--mono); font-size: 11px; }
+
+    .compact-resume { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    .resume-block { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #ffffff; }
+    .resume-block h3 { margin-bottom: 12px; font-size: 22px; }
+    .resume-block p, .resume-block li { color: var(--muted); }
+    .resume-block ul { margin: 0; padding-left: 18px; }
+
+    .contact-panel {
+      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+      padding: 26px;
+      border: 1px solid rgba(8, 127, 115, 0.20); border-radius: 10px;
+      background: #0d1c19; color: #eafff6;
+    }
+
+    .contact-panel p { margin: 8px 0 0; color: rgba(234, 255, 246, 0.72); }
+
+    .contact-panel .button-link { background: var(--lime); border-color: var(--lime); color: var(--ink); }
+
+    .footer-note { margin: 28px 0 0; color: var(--muted); text-align: center; font-family: var(--mono); font-size: 12px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 520ms ease, transform 520ms ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .pulse { box-shadow: none; }
+    }
+
+    @media (max-width: 980px) {
+      .hero, .work-map, .case-head, .contact-panel { grid-template-columns: 1fr; }
+      .capability-board, .compact-resume { grid-template-columns: repeat(2, 1fr); }
+      h1 { font-size: 44px; }
+      .hero { min-height: 0; }
+    }
+
+    @media (max-width: 720px) {
+      .site-shell, .nav-inner { width: min(100% - 24px, 1180px); }
+      .nav-inner { align-items: flex-start; flex-direction: column; }
+      .nav-links { justify-content: flex-start; }
+      main { padding-top: 20px; }
+      .hero-copy, .section { padding: 22px; }
+      h1 { font-size: 36px; }
+      h2 { font-size: 27px; }
+      .hero-lead { font-size: 16px; }
+      .hero-foot, .signal-panel, .capability-board, .compact-resume, .flow-grid, .map-grid, .proof-row { grid-template-columns: 1fr; }
+      .section-header { align-items: start; flex-direction: column; }
+      .profile-widget { grid-template-columns: 74px 1fr; }
+      .profile-widget img { width: 74px; height: 92px; }
+      .case-title-row h3 { font-size: 23px; }
+      .visual { min-height: 0; }
+    }
+
+    @media print {
+      .nav, .case-body, .footer-note { display: none; }
+      body { background: #ffffff; }
+      .site-shell { width: 100%; }
+      .hero, .section { box-shadow: none; break-inside: avoid; }
+      .proof-row { display: none; }
+    }
+  </style>
 </head>
 <body>
-
-<nav class="nav">
-  <div class="container nav-inner">
-    <a class="brand" href="#profile">QS</a>
-    <div class="nav-links">
-      <a href="#projects">项目</a>
-      <a href="#capabilities">能力</a>
-      <a href="#experience">经历</a>
-      <a href="#resume">简历</a>
-      <a href="#contact">联系</a>
+  <nav class="nav" aria-label="页面导航">
+    <div class="nav-inner">
+      <a class="brand" href="#profile" aria-label="返回顶部">
+        <span class="brand-mark">QS</span>
+        <span>曲天舒 · AI Product Portfolio</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects">项目</a>
+        <a href="#capabilities">能力</a>
+        <a href="#experience">经历</a>
+        <a href="#resume">简历</a>
+        <a class="button-link" href="mailto:2024156025@mails.szu.edu.cn">联系</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main>
-  <section id="profile" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-left">
-        <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>AI_PRODUCT_MANAGER / SHENZHEN</p>
-        <h1 class="hero-title">把 LLM 能力拆成流程、评成指标、落成产品<span class="cursor" aria-hidden="true">▍</span></h1>
-        <p class="hero-lead">曲天舒 · 深圳大学 人工智能专业（2028 届）· 两段 AI 产品实习。<br>现寻 <strong>AI 产品经理实习</strong>，可立即到岗，每周 4 天，4 个月以上。</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#projects">查看项目案例</a>
-          <a class="btn btn-ghost" href="#contact">联系我</a>
+  <main class="site-shell">
+    <section class="hero reveal" id="profile">
+      <div class="hero-copy">
+        <div>
+          <p class="eyebrow"><span class="pulse"></span>AI Product Manager · LLM Applications · AI Workflow</p>
+          <h1>把 LLM 能力拆成流程、评成指标、落成产品。</h1>
+          <p class="hero-lead">
+            我是曲天舒，深圳大学人工智能专业（2028 届），两段 AI 产品实习。擅长把 <strong>RAG、Agent、AI Workflow 与 Eval</strong>
+            转化为能落地、能验证、能量化的 AI 应用。
+          </p>
+          <div class="hero-actions">
+            <a class="button-link" href="#projects">查看 AI 项目</a>
+            <a class="ghost-link" href="#resume">快速看简历</a>
+          </div>
+        </div>
+        <div class="hero-foot" aria-label="核心摘要">
+          <div class="metric">
+            <b>2</b>
+            <span>段 AI 产品实习 · 均有量化交付结果</span>
+          </div>
+          <div class="metric">
+            <b>98%</b>
+            <span>问答测试集准确率 · 500+ 条用例</span>
+          </div>
+          <div class="metric">
+            <b>3000+</b>
+            <span>本 AI 绘本 · 1000 组家庭内测 · 好评率 88%</span>
+          </div>
         </div>
       </div>
-      <div class="hero-right" aria-label="个人信息概览">
-        <div class="console">
-          <div class="console-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="console-title mono">candidate.signal.json</span></div>
-          <div class="console-body">
-            <div class="console-line"><span class="k">name</span><span class="v">"曲天舒"</span></div>
-            <div class="console-line"><span class="k">role</span><span class="v">"AI 产品经理实习生"</span></div>
-            <div class="signal-grid">
-              <div class="signal"><span class="signal-k">status</span><span class="signal-v">open_to_work</span></div>
-              <div class="signal"><span class="signal-k">stage</span><span class="signal-v">junior · 2028</span></div>
-              <div class="signal"><span class="signal-k">internship</span><span class="signal-v">2 段 AI PM</span></div>
-              <div class="signal"><span class="signal-k">location</span><span class="signal-v">shenzhen</span></div>
+
+      <aside class="ai-console" aria-label="AI 产品能力面板">
+        <div class="console-bar">
+          <span class="console-dots"><i></i><i></i><i></i></span>
+          <span>candidate.signal.json</span>
+        </div>
+        <div class="profile-widget">
+          <img src="assets/hero-bg.png" alt="深圳大学天际线">
+          <div>
+            <h2>曲天舒</h2>
+            <p>深圳 · AI 产品经理实习生 · LLM / RAG / Agent / Workflow</p>
+          </div>
+        </div>
+        <div class="signal-panel">
+          <div class="signal">
+            <strong>LLM</strong>
+            <span>Prompt 工程 / 模型选型 / 成本分层（DeepSeek · GPT-4o-mini · Qwen-32B）</span>
+          </div>
+          <div class="signal">
+            <strong>RAG</strong>
+            <span>检索增强 / 测试集构建 / 准确率 98%+ / 引用溯源</span>
+          </div>
+          <div class="signal">
+            <strong>Agent</strong>
+            <span>工作流编排 / 多智能体 / 任务拆解 / 工具调用</span>
+          </div>
+          <div class="signal">
+            <strong>Eval</strong>
+            <span>评测机制设计 / 一致性 91% / 适龄评分 4.3/5 / 指标归因</span>
+          </div>
+        </div>
+        <div class="pipeline-strip" aria-label="能力关键词">
+          <span class="pipeline-chip">Dify</span>
+          <span class="pipeline-chip">Coze</span>
+          <span class="pipeline-chip">MCP</span>
+          <span class="pipeline-chip">Python</span>
+          <span class="pipeline-chip">SQL</span>
+          <span class="pipeline-chip">Axure</span>
+          <span class="pipeline-chip">Figma</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section reveal" id="projects">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">SELECTED CASES</span>
+          <h2>项目案例</h2>
+        </div>
+        <p>不只列项目名称，而是展示我如何理解问题、设计流程、组织模型并验证效果。点击卡片可展开案例详情。</p>
+      </div>
+
+      <div class="case-stack">
+        <article class="case-card is-open" id="case-dify" data-case>
+          <div class="case-head" role="button" tabindex="0" aria-expanded="true">
+            <div>
+              <div class="case-meta">
+                <span>独立项目</span>
+                <span>2026.09-至今</span>
+                <span>AI Workflow</span>
+              </div>
+              <div class="case-title-row">
+                <h3>一键生成行业/产品调研报告小助手</h3>
+                <span class="expand-icon" aria-hidden="true">+</span>
+              </div>
+              <p class="case-summary">从 0 到 1 设计并落地一个 11 节点双迭代并行 Pipeline：输入一句话主题，自动完成检索、提炼、大纲、逐章撰写与邮件交付。</p>
+              <div class="tag-row">
+                <span class="tag">Dify</span>
+                <span class="tag">DeepSeek-flash</span>
+                <span class="tag">GPT-4o-mini</span>
+                <span class="tag">Firecrawl</span>
+                <span class="tag">SerpAPI</span>
+                <a class="tag" href="https://udify.app/workflow/7YcvtH7ypXgaTd4g" target="_blank" rel="noopener">在线体验 →</a>
+              </div>
             </div>
-            <div class="console-line"><span class="k">stack</span></div>
-            <div class="chips">
-              <span class="chip">LLM</span><span class="chip">Prompt</span><span class="chip">RAG</span><span class="chip">Agent</span><span class="chip">Dify</span><span class="chip">Coze</span><span class="chip">MCP</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Axure</span><span class="chip">Figma</span>
+            <div class="visual" aria-label="调研报告工作流 Pipeline 图">
+              <div class="visual-title"><span>pipeline.yml</span><span>11 nodes · click steps</span></div>
+              <div class="visual-body">
+                <div class="flow-grid">
+                  <button class="flow-step" type="button" data-detail="检索（节点 01-03）：接收主题 → SerpAPI 搜索 10 条结果 → 代码节点提取链接。">
+                    <b>检索搜索</b><span>SerpAPI 抓取 10 条结果 · 提取链接</span>
+                  </button>
+                  <button class="flow-step" type="button" data-detail="提炼（节点 04-05）：Firecrawl 抓页 + DeepSeek-flash 提炼 ×10 路并行，无关输出空串（相关性过滤）。">
+                    <b>相关性提炼</b><span>Firecrawl 抓页 · DeepSeek 过滤 ×10</span>
+                  </button>
+                  <button class="flow-step" type="button" data-detail="大纲（节点 06-07）：GPT-4o-mini 生成综述大纲，参数提取器结构化为 subtitles（稳定输出）。">
+                    <b>大纲生成</b><span>GPT-4o-mini · 参数提取器结构化</span>
+                  </button>
+                  <button class="flow-step" type="button" data-detail="撰写（节点 08）：DeepSeek-flash 按「参考资料+大纲+章节名」逐章撰写，×10 路并行。">
+                    <b>并行撰写</b><span>DeepSeek 逐章撰写 ×10</span>
+                  </button>
+                  <button class="flow-step" type="button" data-detail="拼接（节点 09）：代码节点以 \\n\\n 拼接各章节为完整 Markdown。">
+                    <b>全文拼接</b><span>Markdown 组装 · join</span>
+                  </button>
+                  <button class="flow-step" type="button" data-detail="交付（节点 10-11）：SMTP 发送邮件（主题含 target），End 输出完整报告，流程闭环。">
+                    <b>邮件交付</b><span>SMTP 送达 · 输出闭环</span>
+                  </button>
+                </div>
+                <div class="flow-detail" aria-live="polite">&gt; 点击任一步骤，查看对应 Pipeline 节点的设计意图</div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="metrics container" aria-label="关键数据">
-      <div class="metric"><span class="metric-n">2</span><span class="metric-l">段 AI PM 实习</span></div>
-      <div class="metric"><span class="metric-n">98%</span><span class="metric-l">问答测试集准确率</span></div>
-      <div class="metric"><span class="metric-n">3000+</span><span class="metric-l">AI 绘本 · 家庭内测</span></div>
-      <div class="metric"><span class="metric-n">90%+</span><span class="metric-l">流程效率提升</span></div>
-    </div>
-  </section>
-
-  <!-- ===== 视图：项目案例 ===== -->
-  <section id="projects" class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="kicker">cat ./cases/projects</p>
-        <h2>项目案例</h2>
-        <p class="section-desc">个人独立从 0 到 1 完成的作品——动手搭过、评过指标、留过痕。</p>
-      </div>
-
-      <article class="case-card reveal" id="case-dify">
-        <div class="case-head" role="button" tabindex="0" aria-expanded="false" aria-controls="case-dify-body">
-          <p class="case-meta">AI_WORKFLOW · DIFY · 2026.09 · MVP</p>
-          <h3>一键生成行业/产品调研报告小助手</h3>
-          <p class="case-summary">从 0 到 1 设计并落地一个 11 节点双迭代并行 Pipeline：输入一句话主题，自动完成 搜索 → 抓取 → 提炼 → 大纲 → 逐章撰写 → 邮件交付。</p>
-          <div class="case-tags">
-            <span class="tag">Dify</span>
-            <span class="tag">DeepSeek-flash</span>
-            <span class="tag">GPT-4o-mini</span>
-            <span class="tag">Firecrawl</span>
-            <span class="tag">SerpAPI</span>
-            <span class="tag">SMTP</span>
-            <a class="btn btn-primary btn-sm" href="https://udify.app/workflow/7YcvtH7ypXgaTd4g" target="_blank" rel="noopener">在线体验 →</a>
-          </div>
-          <span class="case-toggle mono" aria-hidden="true">+</span>
-        </div>
-
-        <div class="case-body" id="case-dify-body">
-          <div class="case-vis" aria-label="工作流节点图">
-            <div class="panel-title mono">pipeline.yml · 11 nodes · 点击节点查看设计意图</div>
-            <div class="pipeline">
-              <p class="stage-label">01 · 检索</p>
-              <button class="pnode" data-detail="start：接收一句话主题（target），如「中美AI行业报告」。" type="button"><span class="pn">01</span><span class="pname">start</span><span class="pm">input</span></button>
-              <button class="pnode" data-detail="google_search：Google 搜索（SerpAPI），query=target，取前 10 条结果。" type="button"><span class="pn">02</span><span class="pname">google_search</span><span class="pm">serpapi</span></button>
-              <button class="pnode" data-detail="parse_links：代码节点，从搜索结果中提取 organic_results 链接列表。" type="button"><span class="pn">03</span><span class="pname">parse_links</span><span class="pm">code</span></button>
-              <p class="stage-label">02 · 提炼</p>
-              <button class="pnode" data-detail="iterate_extract ×10：10 路并行——Firecrawl 抓取单页 → DeepSeek-flash 提炼与 target 相关的内容，无关则输出空字符串（相关性过滤，防止上下文污染）。" type="button"><span class="pn">04</span><span class="pname">iterate_extract ×10</span><span class="pm">firecrawl → deepseek</span></button>
-              <button class="pnode" data-detail="concat_summary：代码节点，拼接各路摘要，形成综述上下文。" type="button"><span class="pn">05</span><span class="pname">concat_summary</span><span class="pm">code</span></button>
-              <p class="stage-label">03 · 大纲</p>
-              <button class="pnode" data-detail="gen_outline：GPT-4o-mini 基于摘要生成报告综述大纲。" type="button"><span class="pn">06</span><span class="pname">gen_outline</span><span class="pm">gpt-4o-mini</span></button>
-              <button class="pnode" data-detail="param_extract：参数提取器将大纲结构化为 subtitles: array[string]——用结构化工具而非 prompt 约定，输出更稳定。" type="button"><span class="pn">07</span><span class="pname">param_extract</span><span class="pm">structured</span></button>
-              <p class="stage-label">04 · 撰写</p>
-              <button class="pnode" data-detail="iterate_write ×10：10 路并行——DeepSeek-flash 按「参考资料 + 大纲 + 当前章节名」逐章撰写。" type="button"><span class="pn">08</span><span class="pname">iterate_write ×10</span><span class="pm">deepseek-flash</span></button>
-              <button class="pnode" data-detail="join_full：代码节点，将各章节以 \\n\\n 拼接为完整 Markdown 全文。" type="button"><span class="pn">09</span><span class="pname">join_full</span><span class="pm">code</span></button>
-              <p class="stage-label">05 · 交付</p>
-              <button class="pnode" data-detail="send_email：SMTP 发送邮件，主题「行业调研报告运行：{target}」。" type="button"><span class="pn">10</span><span class="pname">send_email</span><span class="pm">smtp</span></button>
-              <button class="pnode" data-detail="end：输出完整报告（array[string]），流程闭环。" type="button"><span class="pn">11</span><span class="pname">end</span><span class="pm">output</span></button>
-              <div class="pnode-detail" aria-live="polite">&gt; 点击节点查看每一步的设计意图</div>
+          <div class="case-body">
+            <div class="tabs" role="tablist" aria-label="调研报告小助手项目详情">
+              <button class="tab-button is-active" type="button" role="tab">问题</button>
+              <button class="tab-button" type="button" role="tab">我的角色</button>
+              <button class="tab-button" type="button" role="tab">方案</button>
+              <button class="tab-button" type="button" role="tab">结果</button>
+              <button class="tab-button" type="button" role="tab">方法论</button>
+              <button class="tab-button" type="button" role="tab">被否决的方案</button>
+            </div>
+            <div class="tab-panel is-active"><strong>问题：</strong>行业调研报告（如《中美 AI 行业报告》）人工撰写需大量检索、整理与成文，周期长、成本高；通用「单轮对话」直接生成，则上下文易污染、内容易失真、结果不可交付。</div>
+            <div class="tab-panel"><strong>我的角色：</strong>从 0 到 1 独立完成产品设计与流程编排：节点拆解、模型选型、相关性过滤策略、结构化输出约定，并跑通验证（2026-09-14 全流程运行成功，邮件留痕）。</div>
+            <div class="tab-panel"><strong>方案：</strong>11 节点双迭代并行 Pipeline（见上方节点图）：搜索 → 抓取 → 提炼 → 大纲 → 并行撰写 → 邮件交付。两处 ×10 并行迭代构成双层并行；DeepSeek-flash 承担批量粗活（提炼/撰写），GPT-4o-mini 负责结构化大纲。</div>
+            <div class="tab-panel"><strong>结果：</strong>MVP 跑通即用：输入主题 → 自动检索 10 路网页 → 提炼过滤 → 生成大纲 → 10 路并行成章 → Markdown 全文邮件送达。已实际交付完整《中美 AI 行业报告》（2026-09-14 邮件留痕，见下方截图）。</div>
+            <div class="tab-panel"><strong>方法论：</strong>① 模型成本分层：粗活/精活分模型，控制单次成本；② 双层并行：抓取与撰写均 ×10 并发，压缩串行长流程；③ 相关性过滤：无关网页输出空串，防止上下文污染；④ 结构化优先：用参数提取器取代 prompt 约定，输出稳定可复用。</div>
+            <div class="tab-panel"><strong>被否决的方案：</strong>单轮长对话直出（上下文易污染、成本不可控）；自建爬虫（反爬与维护成本高）；全链路高配模型（质量收益有限但成本显著上升）。最终选择「开源平权模型干批量粗活 + 商用模型做结构化」的组合。</div>
+            <div class="proof-row">
+              <figure class="proof-figure">
+                <a href="assets/proof/dify-run-1.png" target="_blank" rel="noopener"><img src="assets/proof/dify-run-1.png" alt="Dify 工作流运行页面截图"></a>
+                <figcaption>// 运行页：11 节点全部执行成功，报告已产出</figcaption>
+              </figure>
+              <figure class="proof-figure">
+                <a href="assets/proof/email-report-1.png" target="_blank" rel="noopener"><img src="assets/proof/email-report-1.png" alt="QQ 邮箱收到行业调研报告邮件截图"></a>
+                <figcaption>// 交付留痕：2026-09-14 邮件送达完整报告</figcaption>
+              </figure>
             </div>
           </div>
-
-          <div class="tabs" role="tablist">
-            <button class="tab-btn is-active" data-tab="problem" role="tab" aria-selected="true" type="button">问题</button>
-            <button class="tab-btn" data-tab="role" role="tab" aria-selected="false" type="button">我的角色</button>
-            <button class="tab-btn" data-tab="solution" role="tab" aria-selected="false" type="button">方案</button>
-            <button class="tab-btn" data-tab="result" role="tab" aria-selected="false" type="button">结果</button>
-            <button class="tab-btn" data-tab="method" role="tab" aria-selected="false" type="button">方法论</button>
-            <button class="tab-btn" data-tab="rejected" role="tab" aria-selected="false" type="button">被否决的方案</button>
-          </div>
-          <div class="tab-pane is-active" data-pane="problem">
-            <p>行业调研报告（如《中美 AI 行业报告》）人工撰写需要大量检索、整理、成文，周期长、成本高；而通用「单轮对话」直接生成，上下文易污染、内容易失真、结果不可交付。</p>
-          </div>
-          <div class="tab-pane" data-pane="role">
-            <p>从 0 到 1 独立完成产品设计与流程编排：节点拆解、模型选型、相关性过滤策略、结构化输出约定，并跑通验证（2026-09-14 全流程运行成功，邮件留痕）。</p>
-          </div>
-          <div class="tab-pane" data-pane="solution">
-            <p>11 节点双迭代并行 Pipeline（见上方节点图）：<strong>搜索 → 抓取 → 提炼 → 大纲 → 并行撰写 → 邮件交付</strong>。两处 ×10 并行迭代构成双层并行；DeepSeek-flash 承担批量粗活（提炼/撰写），GPT-4o-mini 负责结构化大纲。</p>
-          </div>
-          <div class="tab-pane" data-pane="result">
-            <p>MVP 跑通即用：输入主题 → 自动检索 10 路网页 → 提炼过滤 → 生成大纲 → 10 路并行成章 → Markdown 全文邮件送达。已实际交付完整《中美 AI 行业报告》（2026-09-14 邮件留痕，见下方截图）。</p>
-          </div>
-          <div class="tab-pane" data-pane="method">
-            <ul>
-              <li><strong>模型成本分层</strong>：粗活/精活分模型，控制单次运行成本，避免全链路高配。</li>
-              <li><strong>双层并行</strong>：抓取与撰写均 ×10 并发，把串行长流程压缩为两轮并行。</li>
-              <li><strong>相关性过滤</strong>：无关网页输出空串，从源头防止上下文污染。</li>
-              <li><strong>结构化优先</strong>：用参数提取器取代 prompt 约定，输出格式稳定可复用。</li>
-            </ul>
-          </div>
-          <div class="tab-pane" data-pane="rejected">
-            <p><strong>单轮长对话直出</strong>：上下文易污染、成本不可控、章节质量无保障；<strong>自建爬虫</strong>：反爬与维护成本高；<strong>全链路高配模型</strong>：质量收益有限但成本显著上升。最终选择「开源平权模型干批量粗活 + 商用模型做结构化」的组合。</p>
-          </div>
-
-          <div class="proof">
-            <figure>
-              <a href="assets/proof/dify-run-1.png" target="_blank" rel="noopener"><img src="assets/proof/dify-run-1.png" alt="Dify 工作流运行页面截图"></a>
-              <figcaption class="mono">// 运行页：11 节点全部执行成功，报告已产出</figcaption>
-            </figure>
-            <figure>
-              <a href="assets/proof/email-report-1.png" target="_blank" rel="noopener"><img src="assets/proof/email-report-1.png" alt="QQ 邮箱收到行业调研报告邮件截图"></a>
-              <figcaption class="mono">// 交付留痕：2026-09-14 邮件送达完整报告</figcaption>
-            </figure>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===== 视图：能力地图 ===== -->
-  <section id="capabilities" class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="kicker">cat ./capabilities</p>
-        <h2>能力地图</h2>
-        <p class="section-desc">两段 AI 产品实习里反复使用的四组能力，覆盖从需求到评测的闭环。</p>
+        </article>
       </div>
-      <div class="cap-grid">
-        <div class="cap-card reveal">
-          <span class="cap-n">01</span>
+    </section>
+
+    <section class="section reveal" id="capabilities">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">CAPABILITY MAP</span>
+          <h2>四组能力，一条交付闭环</h2>
+        </div>
+        <p>我更擅长的不是单点工具，而是把 AI 能力放进需求、流程、数据模型和评测机制里，让每个环节都可量化。</p>
+      </div>
+      <div class="capability-board">
+        <article class="capability">
+          <div class="capability-num">01</div>
           <h3>AI 产品设计</h3>
-          <p>需求分析 · 竞品调研 · PRD · 原型</p>
-          <p class="cap-tags mono">Axure · Figma · 墨刀</p>
-        </div>
-        <div class="cap-card reveal">
-          <span class="cap-n">02</span>
+          <p>需求分析、竞品调研、PRD 与原型设计，覆盖从业务问题到产品方案的完整链路。</p>
+          <div class="tag-row"><span class="tag">需求分析</span><span class="tag">PRD</span><span class="tag">原型</span></div>
+        </article>
+        <article class="capability">
+          <div class="capability-num">02</div>
           <h3>LLM 应用工程</h3>
-          <p>Prompt 工程 · RAG · Agent 工作流 · 模型选型</p>
-          <p class="cap-tags mono">Qwen-32B · DeepSeek · GPT-4o-mini · SD + LoRA</p>
-        </div>
-        <div class="cap-card reveal">
-          <span class="cap-n">03</span>
+          <p>Prompt 工程、RAG、Agent 工作流与模型选型，把 LLM 能力组织成可交付的任务链。</p>
+          <div class="tag-row"><span class="tag">RAG</span><span class="tag">Agent</span><span class="tag">模型选型</span></div>
+        </article>
+        <article class="capability">
+          <div class="capability-num">03</div>
           <h3>数据与评测</h3>
-          <p>测试集构建 · 评测机制设计 · 指标归因</p>
-          <p class="cap-tags mono">Python · SQL · Excel · 准确率 / 一致性 / 适龄性</p>
-        </div>
-        <div class="cap-card reveal">
-          <span class="cap-n">04</span>
-          <h3>平台与生态</h3>
-          <p>工作流编排 · 智能体平台 · 工具链落地</p>
-          <p class="cap-tags mono">Coze · Dify · MCP · BringPPT</p>
-        </div>
+          <p>测试集构建、评测机制设计与指标归因，用准确率、一致性和适龄性度量 AI 输出质量。</p>
+          <div class="tag-row"><span class="tag">测试集</span><span class="tag">Eval</span><span class="tag">指标归因</span></div>
+        </article>
+        <article class="capability">
+          <div class="capability-num">04</div>
+          <h3>平台与交付</h3>
+          <p>工作流编排、智能体平台与工具链落地，从 0 到 1 推动方案变成可运行的 MVP。</p>
+          <div class="tag-row"><span class="tag">Dify</span><span class="tag">Coze</span><span class="tag">MCP</span></div>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== 视图：经历 ===== -->
-  <section id="experience" class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="kicker">cat ./experience</p>
-        <h2>经历与证据</h2>
-        <p class="section-desc">两段 AI 产品实习 + 一段学业主线，右侧是每段经历沉淀下来的量化证据。</p>
-      </div>
-      <div class="exp-wrap">
-        <div class="timeline" role="list">
-          <div class="tl-item reveal" role="listitem">
-            <div class="tl-axis"><span class="tl-dot" aria-hidden="true"></span></div>
-            <div>
-              <p class="tl-time">2026.05 – 2026.09</p>
-              <p class="tl-role">AI 产品实习生 · 深圳薄云信息技术</p>
-              <p class="tl-org">企业培训 AI 数字员工中台（LLM + RAG）</p>
-              <p class="tl-desc">负责 PPT 自动生成 Skill 设计、多模态解析规则、测试集与评测机制。300+ 份资料结构化加工、500+ 条问答测试集准确率 98%+、答疑人力降 55%、PPT 课件 30+ 页、制作周期 3 天 → 2 小时。</p>
-            </div>
-          </div>
-          <div class="tl-item reveal" role="listitem">
-            <div class="tl-axis"><span class="tl-dot" aria-hidden="true"></span></div>
-            <div>
-              <p class="tl-time">2026.01 – 2026.04</p>
-              <p class="tl-role">AI 产品实习生 · 深圳星伴伴科技</p>
-              <p class="tl-org">AIGC 儿童绘本多智能体中台（Qwen-32B + SD + LoRA）</p>
-              <p class="tl-desc">需求分析 / PRD / 原型、分年龄 Prompt 规则、适龄性与一致性评测。绘本周期 7 天 → 10 分钟、边际成本降 90%+、适龄评分 4.3/5、角色跨页一致性 91%、1000 组家庭内测 3000+ 本、好评率 88%。</p>
-            </div>
-          </div>
-          <div class="tl-item reveal" role="listitem">
-            <div class="tl-axis"><span class="tl-dot" aria-hidden="true"></span></div>
-            <div>
-              <p class="tl-time">2024.09 – 2028.06</p>
-              <p class="tl-role">深圳大学 · 计算机与软件学院 · 人工智能专业（本科）</p>
-              <p class="tl-org">2028 届 · 大三 · GPA 3.2</p>
-              <p class="tl-desc">院学生会外联部部长 · 义往情深小组组长 · 新生导生 · 义工时 132h。</p>
-            </div>
-          </div>
+    <section class="section reveal" id="experience">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">EXPERIENCE TO EVIDENCE</span>
+          <h2>经历与证据</h2>
         </div>
-        <div class="evidence-map reveal" aria-label="量化证据">
-          <p class="em-title">evidence_map — 量化证据</p>
-          <div class="em-grid">
-            <div class="em-cluster">
-              <h4>CONTENT_ENGINEERING</h4>
-              <p>300+ 份企业资料结构化加工，支撑问答与课件生成</p>
-            </div>
-            <div class="em-cluster">
-              <h4>EVAL_SYSTEM</h4>
-              <p>500+ 条问答测试集 · 准确率 98%+；适龄评分 4.3/5 · 一致性 91%</p>
-            </div>
-            <div class="em-cluster">
-              <h4>SCALE_PROOF</h4>
-              <p>1000 组家庭内测 · 3000+ 本 AI 绘本 · 好评率 88%</p>
-            </div>
-            <div class="em-cluster">
-              <h4>EFFICIENCY</h4>
-              <p>PPT 3 天 → 2 小时 · 绘本 7 天 → 10 分钟 · 边际成本降 90%+</p>
-            </div>
+        <p>把工作经历改成能力证据：每段经历对应可量化的结果，而不是只按时间排列。</p>
+      </div>
+
+      <div class="work-map">
+        <div class="journey">
+          <article class="journey-item">
+            <div class="journey-time">2026.05-2026.09 · 深圳薄云信息技术</div>
+            <h3>AI 产品实习生 · 企业培训 AI 数字员工中台</h3>
+            <p>负责 PPT 自动生成 Skill 设计、多模态解析规则、测试集与评测机制。300+ 份资料结构化加工、500+ 条问答测试集准确率 98%+、答疑人力降 55%、PPT 课件 30+ 页、制作周期 3 天 → 2 小时。</p>
+            <div class="tag-row"><span class="tag">LLM</span><span class="tag">RAG</span><span class="tag">评测设计</span></div>
+          </article>
+          <article class="journey-item">
+            <div class="journey-time">2026.01-2026.04 · 深圳星伴伴科技</div>
+            <h3>AI 产品实习生 · AIGC 儿童绘本多智能体中台</h3>
+            <p>负责需求分析、PRD、原型、分年龄 Prompt 规则与适龄性/一致性评测。绘本周期 7 天 → 10 分钟、边际成本降 90%+、适龄评分 4.3/5、角色跨页一致性 91%、1000 组家庭内测 3000+ 本、好评率 88%。</p>
+            <div class="tag-row"><span class="tag">Qwen-32B</span><span class="tag">SD + LoRA</span><span class="tag">多智能体</span></div>
+          </article>
+          <article class="journey-item">
+            <div class="journey-time">2024.09-2028.06 · 深圳大学 计算机与软件学院</div>
+            <h3>人工智能专业 · 本科（2028 届 · 大三）</h3>
+            <p>院学生会外联部部长 · 义往情深小组组长 · 新生导生 · 义工时 132h。</p>
+            <div class="tag-row"><span class="tag">GPA 3.2</span><span class="tag">无挂科</span><span class="tag">组织协作</span></div>
+          </article>
+        </div>
+        <div class="evidence-map" aria-label="量化证据地图">
+          <div class="map-title">
+            <span>quantified_evidence</span>
+            <span>4 clusters</span>
+          </div>
+          <div class="map-grid">
+            <div class="map-node"><b>内容工程</b><span>300+ 份企业资料结构化加工，支撑问答与课件生成。</span></div>
+            <div class="map-node"><b>评测体系</b><span>500+ 条问答测试集 · 准确率 98%+ · 一致性 91% · 适龄评分 4.3/5。</span></div>
+            <div class="map-node"><b>规模验证</b><span>1000 组家庭内测 · 3000+ 本 AI 绘本 · 好评率 88%。</span></div>
+            <div class="map-node"><b>效率提升</b><span>PPT 3 天 → 2 小时 · 绘本 7 天 → 10 分钟 · 边际成本降 90%+。</span></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== 视图：紧凑简历 ===== -->
-  <section id="resume" class="section">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="kicker">cat ./resume</p>
-        <h2>紧凑简历</h2>
-        <p class="section-desc">求职方向、教育背景、能力与工具栈的浓缩版。</p>
+    <section class="section reveal" id="resume">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">COMPACT RESUME</span>
+          <h2>快速版简历信息</h2>
+        </div>
+        <p>给 HR 和业务面试官快速扫描的版本。公网页面不展示手机号等隐私信息，完整简历可邮件获取。</p>
       </div>
-      <div class="resume-grid">
-        <div class="resume-block reveal">
-          <h3>JOB_TARGET</h3>
-          <p>AI 产品经理实习生 · 立即到岗 · 每周 4 天 · 4 个月以上</p>
-        </div>
-        <div class="resume-block reveal">
-          <h3>EDUCATION</h3>
-          <p>深圳大学 · 计算机与软件学院 · 人工智能专业（2028 届）</p>
-          <p class="sub">2024.09 – 2028.06 · 大三 · GPA 3.2 · 无挂科</p>
-        </div>
-        <div class="resume-block reveal">
-          <h3>AI_PRODUCT_CAPABILITY</h3>
-          <p>需求 → PRD → 原型 → 工作流 → 评测 全链路，两段实习均产出量化结果</p>
-        </div>
-        <div class="resume-block reveal">
-          <h3>TOOLKIT</h3>
-          <p>Axure / Figma / 墨刀 · Python / SQL / Excel · Coze / Dify / Agent / MCP</p>
-        </div>
+      <div class="compact-resume">
+        <article class="resume-block">
+          <h3>求职方向</h3>
+          <p>AI 产品经理实习生 · 立即到岗 · 每周 4 天 · 4 个月以上。</p>
+          <div class="tag-row">
+            <span class="tag">深圳</span>
+            <span class="tag">大三</span>
+            <span class="tag">AI 产品</span>
+          </div>
+        </article>
+        <article class="resume-block">
+          <h3>教育背景</h3>
+          <p><strong>深圳大学 · 计算机与软件学院</strong><br>人工智能专业 · 本科 · 2024.09-2028.06 · 大三 · GPA 3.2 / 4.0 · 无挂科</p>
+        </article>
+        <article class="resume-block">
+          <h3>AI 产品能力</h3>
+          <ul>
+            <li>需求 → PRD → 原型 → 工作流 → 评测 全链路，两段实习均有量化结果。</li>
+            <li>LLM / Prompt 工程 / RAG / Agent 工作流 / 模型选型。</li>
+            <li>测试集构建与评测机制设计（准确率 · 一致性 · 适龄性）。</li>
+          </ul>
+        </article>
+        <article class="resume-block">
+          <h3>平台与工具</h3>
+          <ul>
+            <li>Coze / Dify / MCP / Agent 平台 · BringPPT 工具开发。</li>
+            <li>Axure / Figma / 墨刀 · Python / SQL / Excel。</li>
+            <li>多智能体编排、工作流落地与指标归因。</li>
+          </ul>
+        </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== 视图：联系 ===== -->
-  <section id="contact" class="section">
-    <div class="container">
-      <div class="contact-panel reveal">
-        <p class="kicker">mail --to recruiters</p>
-        <h2>有 AI 产品实习机会？<br>聊一聊。</h2>
-        <p class="contact-sub">深圳 · AI 产品经理实习生 · 可立即到岗</p>
-        <a class="btn btn-primary btn-lg" href="mailto:2024156025@mails.szu.edu.cn">2024156025@mails.szu.edu.cn</a>
+    <section class="contact-panel reveal" id="contact">
+      <div>
+        <h2>有 AI 产品实习机会？聊聊。</h2>
+        <p>深圳 · AI 产品经理实习生 · 可立即到岗。公网版不展示手机号，完整简历可邮件获取。</p>
       </div>
-      <p class="footer-note">site v1.0 · single-file static · generated 2026-10-22</p>
-    </div>
-  </section>
+      <a class="button-link" href="mailto:2024156025@mails.szu.edu.cn">2024156025@mails.szu.edu.cn</a>
+    </section>
 
-</main>
+    <p class="footer-note">Standalone HTML portfolio · GitHub Pages · Public version hides private contact details</p>
 
-<script>
-(function(){
-  "use strict";
+  </main>
 
-  /* 入场动画 */
-  var revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12 });
-    revealEls.forEach(function(el){ io.observe(el); });
-  } else {
-    revealEls.forEach(function(el){ el.classList.add("in"); });
-  }
+    revealItems.forEach((item) => revealObserver.observe(item));
 
-  /* 案例卡片折叠 */
-  var caseCard = document.getElementById("case-dify");
-  var caseHead = caseCard.querySelector(".case-head");
-  function toggleCase(force){
-    var open = typeof force === "boolean" ? force : !caseCard.classList.contains("is-open");
-    caseCard.classList.toggle("is-open", open);
-    caseHead.setAttribute("aria-expanded", open ? "true" : "false");
-  }
-  caseHead.addEventListener("click", function(e){
-    if (e.target.closest("a")) return; // 在线体验按钮不触发折叠
-    toggleCase();
-  });
-  caseHead.addEventListener("keydown", function(e){
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      toggleCase();
-    }
-  });
+    document.querySelectorAll("[data-case]").forEach((caseCard) => {
+      const head = caseCard.querySelector(".case-head");
+      const panels = caseCard.querySelectorAll(".tab-panel");
+      const buttons = caseCard.querySelectorAll(".tab-button");
 
-  /* Tab 切换 */
-  var tabBtns = document.querySelectorAll(".tab-btn");
-  var tabPanes = document.querySelectorAll(".tab-pane");
-  tabBtns.forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var target = btn.getAttribute("data-tab");
-      tabBtns.forEach(function(b){
-        var active = b === btn;
-        b.classList.toggle("is-active", active);
-        b.setAttribute("aria-selected", active ? "true" : "false");
+      const toggleCase = () => {
+        const isOpen = caseCard.classList.toggle("is-open");
+        head.setAttribute("aria-expanded", String(isOpen));
+      };
+
+      head.addEventListener("click", (event) => {
+        if (event.target.closest("a")) return;
+        toggleCase();
       });
-      tabPanes.forEach(function(p){
-        p.classList.toggle("is-active", p.getAttribute("data-pane") === target);
+      head.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleCase();
+        }
+      });
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          buttons.forEach((item) => item.classList.remove("is-active"));
+          panels.forEach((item) => item.classList.remove("is-active"));
+          button.classList.add("is-active");
+          panels[index].classList.add("is-active");
+        });
       });
     });
-  });
 
-  /* Pipeline 节点点击 */
-  var pnodes = document.querySelectorAll(".pnode");
-  var pdetail = document.querySelector(".pnode-detail");
-  pnodes.forEach(function(node){
-    node.addEventListener("click", function(){
-      pnodes.forEach(function(n){ n.classList.toggle("is-active", n === node); });
-      if (pdetail) pdetail.textContent = "> " + node.getAttribute("data-detail");
+    document.querySelectorAll(".flow-step").forEach((step) => {
+      step.addEventListener("click", () => {
+        document.querySelectorAll(".flow-step").forEach((item) => item.classList.remove("is-active"));
+        step.classList.add("is-active");
+        const detail = document.querySelector(".flow-detail");
+        if (detail) detail.textContent = "> " + step.getAttribute("data-detail");
+      });
     });
-  });
-})();
-
-</script>
+  </script>
 </body>
 </html>
