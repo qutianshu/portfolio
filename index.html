@@ -667,7 +667,7 @@
           <span class="section-kicker">SELECTED CASES</span>
           <h2>项目案例</h2>
         </div>
-        <p>不只列项目名称，而是展示我如何理解问题、设计流程、组织模型并验证效果。点击卡片可展开案例详情。</p>
+
       </div>
 
       <div class="case-stack">
@@ -694,7 +694,7 @@
               </div>
             </div>
             <div class="visual" aria-label="调研报告工作流 Pipeline 图">
-              <div class="visual-title"><span>pipeline.yml</span><span>11 nodes · click steps</span></div>
+              <div class="visual-title"><span>pipeline.yml</span></div>
               <div class="visual-body">
                 <div class="flow-grid">
                   <button class="flow-step" type="button" data-detail="检索（节点 01-03）：接收主题 → SerpAPI 搜索 10 条结果 → 代码节点提取链接。">
@@ -716,7 +716,6 @@
                     <b>邮件交付</b><span>SMTP 送达 · 输出闭环</span>
                   </button>
                 </div>
-                <div class="flow-detail" aria-live="polite">&gt; 点击任一步骤，查看对应 Pipeline 节点的设计意图</div>
               </div>
             </div>
           </div>
@@ -773,17 +772,11 @@
               </div>
             </div>
             <div class="visual" aria-label="评测集构成预览">
-              <div class="visual-title"><span>eval-suite.json</span><span>60 cases · 8 dims · 2 specs</span></div>
+              <div class="visual-title"><span>eval-suite.json</span></div>
               <div class="visual-body">
                 <div class="eval-preview">
-                  <div class="eval-preview-tabs">
-                    <span class="ep-tab is-active">内容识别 · 36</span>
-                    <span class="ep-tab">用户意向 · 24</span>
-                    <span class="ep-tab">打分标准 D1-D8</span>
-                  </div>
                   <div class="ep-row"><span class="ep-id">CR-003</span><span class="ep-sc">车型对比</span><span class="ep-title">特斯拉 Model Y 对比问界 M7，家用到底选谁？</span></div>
                   <div class="ep-json">{ "is_auto_content": "是", "is_sales_related": "是", "vehicle_type": "新车", "brand": ["特斯拉", "AITO 问界"] … }</div>
-                  <div class="ep-note">&gt; 正例 / 负例 / 边界难例 ≈ 4 : 3 : 3 · 字段准确性权重最高（25%）</div>
                 </div>
               </div>
             </div>
@@ -801,7 +794,7 @@
             <div class="tab-panel"><strong>方案：</strong>内容识别 36 条覆盖新车测评/二手车/车型对比/资讯/技术科普/售后等场景，字段含 is_auto_content、is_sales_related、vehicle_type、brand、series、model，专项测试别名归一（问介→问界）、ASR 纠偏（领跑→零跑）、多实体抽取与内容主体变更；用户意向 24 条覆盖高/中/低/排除四类，含已提交线索、试驾导向、家庭共决策、从业者干扰、车展围观等边界样本。打分标准 8 维加权：字段准确性 25% 权重最高，任务遵循 10%、完整性 15%、标准化一致性 15%、边界不乱猜 10%、鲁棒性 10%、多源证据融合 10%、业务可用性 5%。</div>
             <div class="tab-panel"><strong>结果：</strong>交付可复用的评测资产：60 条正式用例 + 双场景标注规范 + 8 维打分标准 + 汇总看板，支撑离线评估、版本回归、灰度前验收与 Bad Case 回流；验收口径明确——内容识别看汽车内容 Precision、购车/卖车相关 Precision、品牌/车系/车型准确率与字段完整度，用户意向识别看高意向 Precision、Recall 与 Macro-F1。</div>
             <div class="tab-panel"><strong>方法论：</strong>① 目标反推用例：先定「是否挂载 / 是否线索」的业务决策，再定评测维度与用例；② 样本结构 4:3:3（正/负/边界），避免全低难度失真；③ 权重对齐业务：字段准确性 25% 最高，格式规范仅 10%；④ 标注规范先行：别名、边界、口径先写死，评测结果才可复现、可归因。</div>
-            <p class="eval-note">完整产出物：PRD 文档（飞书在线，点击卡片顶部「查看 PRD 文档」） + 正式版评测集 V2（60 条 + 标注规范，点击「查看评测集」直接在本页查看完整表格）。</p>
+
           </div>
         </article>
       </div>
@@ -813,7 +806,7 @@
           <span class="section-kicker">CAPABILITY MAP</span>
           <h2>四组能力，一条交付闭环</h2>
         </div>
-        <p>我更擅长的不是单点工具，而是把 AI 能力放进需求、流程、数据模型和评测机制里，让每个环节都可量化。</p>
+
       </div>
       <div class="capability-board">
         <article class="capability">
@@ -849,7 +842,7 @@
           <span class="section-kicker">EXPERIENCE TO EVIDENCE</span>
           <h2>产品能力地图</h2>
         </div>
-        <p>把工作经历改成能力证据：每段经历对应可迁移的产品能力，而不是只按时间排列。</p>
+
       </div>
 
       <div class="work-map">
@@ -876,7 +869,7 @@
         <div class="evidence-map" aria-label="可迁移产品能力地图">
           <div class="map-title">
             <span>transferable_product_capabilities</span>
-            <span>4 clusters</span>
+            
           </div>
           <div class="map-grid">
             <div class="map-node"><b>需求拆解</b><span>从模糊需求中拆出业务对象、流程、约束与验收标准。</span></div>
@@ -894,7 +887,7 @@
           <span class="section-kicker">COMPACT RESUME</span>
           <h2>快速版简历信息</h2>
         </div>
-        <p>给 HR 和业务面试官快速扫描的版本。公网页面不展示手机号等隐私信息，完整简历可邮件获取。</p>
+
       </div>
       <div class="compact-resume">
         <article class="resume-block">
