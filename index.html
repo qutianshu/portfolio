@@ -290,6 +290,124 @@
 
     .case-stack { display: grid; gap: 18px; }
 
+    .case-meta span.course { background: #ffeae4; color: #c23b1f; }
+
+    .action-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+    .action-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 40px; padding: 9px 16px;
+      border: 1px solid var(--teal); border-radius: var(--radius);
+      color: var(--teal-dark); background: #ffffff;
+      font-family: var(--mono); font-size: 13px; font-weight: 800;
+      cursor: pointer; text-decoration: none;
+      transition: 160ms ease;
+    }
+
+    .action-btn:hover { background: var(--surface-soft); border-color: var(--teal-dark); transform: translateY(-1px); }
+
+    .action-btn.primary { color: #ffffff; background: var(--teal); }
+    .action-btn.primary:hover { background: var(--teal-dark); }
+
+    /* ===== 评测集弹窗 ===== */
+    .eval-modal {
+      display: none; position: fixed; inset: 0; z-index: 60;
+      align-items: center; justify-content: center;
+      padding: 4vw; background: rgba(13, 28, 25, 0.62);
+    }
+
+    .eval-modal.is-open { display: flex; }
+
+    .eval-dialog {
+      width: min(1080px, 100%); max-height: 88vh;
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: #ffffff; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(13, 28, 25, 0.35);
+    }
+
+    .eval-head {
+      display: flex; align-items: start; justify-content: space-between; gap: 16px;
+      padding: 18px 20px; border-bottom: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .eval-head h3 { font-size: 20px; margin: 0 0 6px; }
+    .eval-head .eval-sub { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .eval-close {
+      flex: 0 0 38px; width: 38px; height: 38px;
+      display: grid; place-items: center;
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: #ffffff; color: var(--teal-dark);
+      font-size: 18px; font-weight: 800; cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .eval-close:hover { color: var(--ink); background: var(--lime); transform: rotate(90deg); }
+
+    .eval-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 20px 0; }
+
+    .eval-tab {
+      min-height: 36px; padding: 8px 14px;
+      border: 1px solid var(--line); border-radius: var(--radius) var(--radius) 0 0;
+      background: #ffffff; color: var(--muted);
+      font-family: var(--mono); font-size: 12px; font-weight: 800; cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    .eval-tab:hover, .eval-tab.is-active { color: var(--ink); border-color: rgba(8, 127, 115, 0.35); background: var(--surface-soft); }
+
+    .eval-panel { display: none; padding: 16px 20px 20px; overflow: auto; }
+    .eval-panel.is-active { display: block; }
+
+    .eval-table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+
+    .eval-table { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 12px; line-height: 1.5; }
+
+    .eval-table th {
+      position: sticky; top: 0; z-index: 1;
+      padding: 10px 12px; text-align: left;
+      background: var(--teal-dark); color: #eafff6;
+      font-family: var(--mono); font-size: 11px; font-weight: 800; white-space: nowrap;
+    }
+
+    .eval-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+    .eval-table tr:nth-child(even) td { background: #f8fcf9; }
+    .eval-table td.id { font-family: var(--mono); font-weight: 800; color: var(--teal-dark); white-space: nowrap; }
+    .eval-table td.mono { font-family: var(--mono); font-size: 11px; }
+    .eval-json { font-family: var(--mono); font-size: 11px; white-space: pre-wrap; color: #075f58; }
+    .eval-pill {
+      display: inline-block; min-width: 40px; padding: 2px 8px; border-radius: 999px;
+      font-family: var(--mono); font-size: 11px; font-weight: 800; text-align: center;
+    }
+    .eval-pill.p0 { background: #ffeae4; color: #c23b1f; }
+    .eval-pill.p1 { background: #fff4d6; color: #8a6a00; }
+    .eval-pill.p2 { background: #e8f2ef; color: #4a6b63; }
+
+    .eval-note {
+      margin: 14px 0 0; padding: 12px 14px;
+      border: 1px dashed rgba(8, 127, 115, 0.30); border-radius: var(--radius);
+      background: #f8fcf9; color: var(--muted); font-size: 12px; line-height: 1.6;
+    }
+
+    .eval-kv { display: grid; grid-template-columns: minmax(120px, 0.28fr) minmax(0, 1fr); gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .eval-kv > div { padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 12px; line-height: 1.6; }
+    .eval-kv > div:nth-last-child(-n+2) { border-bottom: 0; }
+    .eval-kv .k { background: var(--surface-soft); color: var(--teal-dark); font-weight: 800; }
+    .eval-kv .v { color: var(--ink); }
+
+    .eval-preview { border: 1px solid rgba(8, 127, 115, 0.20); border-radius: var(--radius); background: #ffffff; overflow: hidden; }
+    .eval-preview-tabs { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+    .ep-tab { padding: 5px 10px; border-radius: 999px; background: var(--surface-soft); color: var(--teal-dark); font-family: var(--mono); font-size: 11px; font-weight: 800; }
+    .ep-tab.is-active { background: var(--teal); color: #ffffff; }
+    .ep-row { display: flex; gap: 10px; align-items: baseline; padding: 12px 12px 4px; font-size: 12px; }
+    .ep-id { font-family: var(--mono); font-weight: 800; color: var(--teal-dark); white-space: nowrap; }
+    .ep-sc { font-family: var(--mono); color: var(--muted); white-space: nowrap; }
+    .ep-title { color: var(--ink); }
+    .ep-json { margin: 6px 12px; padding: 8px 10px; border-radius: 6px; background: #f2fbf7; font-family: var(--mono); font-size: 11px; color: #075f58; line-height: 1.5; }
+    .ep-note { padding: 10px 12px; border-top: 1px dashed rgba(8, 127, 115, 0.30); color: var(--muted); font-family: var(--mono); font-size: 11px; }
+
     .case-card {
       border: 1px solid var(--line); border-radius: 10px;
       background: #ffffff; overflow: hidden;
@@ -629,6 +747,63 @@
             </div>
           </div>
         </article>
+
+        <article class="case-card" id="case-eval" data-case>
+          <div class="case-head" role="button" tabindex="0" aria-expanded="false">
+            <div>
+              <div class="case-meta">
+                <span class="course">课程项目</span>
+                <span>AI 评测体系</span>
+                <span>汽车垂类</span>
+              </div>
+              <div class="case-title-row">
+                <h3>汽车垂类 · 内容识别与用户意向评测体系</h3>
+                <span class="expand-icon" aria-hidden="true">+</span>
+              </div>
+              <p class="case-summary">面向「自动挂载汽车线索组件」的业务目标，从 0 设计一套可验收的评测资产：内容识别 / 信息抽取 36 条 + 用户意向识别 24 条，共 60 条正式用例，配套 8 维加权打分标准与双场景标注规范。</p>
+              <div class="tag-row">
+                <span class="tag">Eval</span>
+                <span class="tag">标注规范</span>
+                <span class="tag">8 维打分</span>
+                <span class="tag">PRD</span>
+              </div>
+              <div class="action-row">
+                <a class="action-btn primary" href="https://hcnbz4r5q6mi.feishu.cn/wiki/KmA5wdPy3iHlXmkEGfxc4zjAn5f" target="_blank" rel="noopener">查看 PRD 文档</a>
+                <button class="action-btn" type="button" data-open-eval>查看评测集（60 条）</button>
+              </div>
+            </div>
+            <div class="visual" aria-label="评测集构成预览">
+              <div class="visual-title"><span>eval-suite.json</span><span>60 cases · 8 dims · 2 specs</span></div>
+              <div class="visual-body">
+                <div class="eval-preview">
+                  <div class="eval-preview-tabs">
+                    <span class="ep-tab is-active">内容识别 · 36</span>
+                    <span class="ep-tab">用户意向 · 24</span>
+                    <span class="ep-tab">打分标准 D1-D8</span>
+                  </div>
+                  <div class="ep-row"><span class="ep-id">CR-003</span><span class="ep-sc">车型对比</span><span class="ep-title">特斯拉 Model Y 对比问界 M7，家用到底选谁？</span></div>
+                  <div class="ep-json">{ "is_auto_content": "是", "is_sales_related": "是", "vehicle_type": "新车", "brand": ["特斯拉", "AITO 问界"] … }</div>
+                  <div class="ep-note">&gt; 正例 / 负例 / 边界难例 ≈ 4 : 3 : 3 · 字段准确性权重最高（25%）</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="tabs" role="tablist" aria-label="汽车垂类评测体系项目详情">
+              <button class="tab-button is-active" type="button" role="tab">问题</button>
+              <button class="tab-button" type="button" role="tab">我的角色</button>
+              <button class="tab-button" type="button" role="tab">方案</button>
+              <button class="tab-button" type="button" role="tab">结果</button>
+              <button class="tab-button" type="button" role="tab">方法论</button>
+            </div>
+            <div class="tab-panel is-active"><strong>问题：</strong>汽车业务要支撑「自动挂载线索组件」：判断内容是否适合挂载、识别高意向用户、补齐新车/二手车/品牌/车系/车型字段。但模型输出缺少统一评测口径——好坏全凭感觉，无法验收、无法回归、无法定位 Bad Case。</div>
+            <div class="tab-panel"><strong>我的角色：</strong>独立完成 PRD 与评测体系设计：把业务目标拆成「内容识别 + 用户意向」双任务，设计 8 维加权打分标准与双场景标注规范，构建 60 条正式用例（内容识别 36 + 用户意向 24），并给出验收口径与回归流程。</div>
+            <div class="tab-panel"><strong>方案：</strong>内容识别 36 条覆盖新车测评/二手车/车型对比/资讯/技术科普/售后等场景，字段含 is_auto_content、is_sales_related、vehicle_type、brand、series、model，专项测试别名归一（问介→问界）、ASR 纠偏（领跑→零跑）、多实体抽取与内容主体变更；用户意向 24 条覆盖高/中/低/排除四类，含已提交线索、试驾导向、家庭共决策、从业者干扰、车展围观等边界样本。打分标准 8 维加权：字段准确性 25% 权重最高，任务遵循 10%、完整性 15%、标准化一致性 15%、边界不乱猜 10%、鲁棒性 10%、多源证据融合 10%、业务可用性 5%。</div>
+            <div class="tab-panel"><strong>结果：</strong>交付可复用的评测资产：60 条正式用例 + 双场景标注规范 + 8 维打分标准 + 汇总看板，支撑离线评估、版本回归、灰度前验收与 Bad Case 回流；验收口径明确——内容识别看汽车内容 Precision、购车/卖车相关 Precision、品牌/车系/车型准确率与字段完整度，用户意向识别看高意向 Precision、Recall 与 Macro-F1。</div>
+            <div class="tab-panel"><strong>方法论：</strong>① 目标反推用例：先定「是否挂载 / 是否线索」的业务决策，再定评测维度与用例；② 样本结构 4:3:3（正/负/边界），避免全低难度失真；③ 权重对齐业务：字段准确性 25% 最高，格式规范仅 10%；④ 标注规范先行：别名、边界、口径先写死，评测结果才可复现、可归因。</div>
+            <p class="eval-note">完整产出物：PRD 文档（飞书在线，点击卡片顶部「查看 PRD 文档」） + 正式版评测集 V2（60 条 + 标注规范，点击「查看评测集」直接在本页查看完整表格）。</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -766,6 +941,32 @@
 
   </main>
 
+  <div class="eval-modal" id="eval-modal" role="dialog" aria-modal="true" aria-label="汽车垂类项目评测集">
+    <div class="eval-dialog">
+      <div class="eval-head">
+        <div>
+          <h3>汽车垂类项目 · 正式版评测集 V2</h3>
+          <p class="eval-sub">内容识别 36 条 + 用户意向 24 条 · 8 维加权打分标准 · 双场景标注规范</p>
+        </div>
+        <button class="eval-close" type="button" data-close-eval aria-label="关闭">×</button>
+      </div>
+      <div class="eval-tabs" role="tablist" aria-label="评测集内容">
+        <button class="eval-tab is-active" type="button" role="tab" data-eval-tab="content">内容识别 · 36</button>
+        <button class="eval-tab" type="button" role="tab" data-eval-tab="intent">用户意向 · 24</button>
+        <button class="eval-tab" type="button" role="tab" data-eval-tab="scoring">打分标准 · 8 维</button>
+        <button class="eval-tab" type="button" role="tab" data-eval-tab="spec">标注规范</button>
+      </div>
+      <div class="eval-panel is-active" id="eval-panel-content"></div>
+      <div class="eval-panel" id="eval-panel-intent"></div>
+      <div class="eval-panel" id="eval-panel-scoring"></div>
+      <div class="eval-panel" id="eval-panel-spec"></div>
+    </div>
+  </div>
+
+  <script>
+const EVAL_DATA = {"intro":[["汽车垂类项目正式版评测集（60条）+ 标注规范",""],["项目目标","支撑汽车 PLC 自动挂载：识别高意向用户 + 识别适合挂载的汽车内容 + 补齐新车/二手车、品牌、车系/车型等关键字段。"],["评测集范围","内容识别/信息抽取 36 条；用户意向识别 24 条；总计 60 条。"],["适用场景","离线模型评估、版本回归测试、灰度前验收、Bad Case 回流补充。"],["推荐样本结构","内容识别：正例/负例/边界难例≈4:3:3；用户意向：高/中/低 + 排除类均衡覆盖。"],["建议评测流程","先阅读标注规范 → 填写模型输出 → 根据打分标准打分 → 在汇总看板查看整体结果。"],["核心产出","1）标准答案；2）评分维度；3）根因归类；4）修复状态；5）标注规范。"],["验收建议","内容识别重点看：汽车内容 Precision、购车/卖车相关 Precision、品牌/车系/车型准确率、字段完整度。用户意向识别重点看：高意向 Precision、Recall、Macro-F1。"],["特别说明","本评测集专门对齐你的项目业务目标，不评估通用闲聊能力，重点判断‘能否支持自动挂载与线索补齐’。"]],"scoring":[{"维度":"D1 任务遵循/格式规范","权重":"10%","评测说明":"是否按要求输出结构化结果（JSON/字段），字段命名和层级是否正确","优(5分)锚点":"完全按约定 schema 输出，无多余或缺失关键字段","良(4分)锚点":"基本符合 schema，少量格式问题","及格(3分)锚点":"可读但结构不稳定，需要人工调整","不及格(1-2分)锚点":"结构错误、字段缺失严重、无法机读"},{"维度":"D2 字段准确性","权重":"25%","评测说明":"关键字段是否正确：内容识别看 is_auto_content / is_sales_related / vehicle_type / brand / series / model；意向识别看意向等级与原因","优(5分)锚点":"关键字段全部正确","良(4分)锚点":"少量非关键字段错误","及格(3分)锚点":"有1-2个关键字段错误","不及格(1-2分)锚点":"关键字段大面积错误或幻觉"},{"维度":"D3 完整性/召回","权重":"15%","评测说明":"应识别的信息是否有漏抽，尤其多车型、多信号、多行为融合场景","优(5分)锚点":"应抽尽抽，无明显遗漏","良(4分)锚点":"有个别轻微遗漏","及格(3分)锚点":"存在明显漏项","不及格(1-2分)锚点":"漏抽严重，无法用于业务"},{"维度":"D4 标准化一致性","权重":"15%","评测说明":"品牌、车系、车型归一化；用户意向高/中/低判断口径是否一致","优(5分)锚点":"标准化完全正确，分类口径统一","良(4分)锚点":"少量别名/层级问题","及格(3分)锚点":"存在部分标准化错误","不及格(1-2分)锚点":"大量映射错误或口径混乱"},{"维度":"D5 边界与不乱猜","权重":"10%","评测说明":"信息不足或冲突时，是否返回 unknown / 待确认，而不是乱猜","优(5分)锚点":"边界处理稳健，不乱猜","良(4分)锚点":"偶有过度推断","及格(3分)锚点":"边界样本处理一般","不及格(1-2分)锚点":"明显乱猜，业务风险高"},{"维度":"D6 鲁棒性","权重":"10%","评测说明":"对口语、别名、错别字、OCR 噪声、从业者干扰等的处理能力","优(5分)锚点":"噪声/干扰场景下仍稳定","良(4分)锚点":"大多数场景可处理","及格(3分)锚点":"鲁棒性一般","不及格(1-2分)锚点":"稍有噪声或干扰就出错"},{"维度":"D7 多源证据融合","权重":"10%","评测说明":"是否能利用标题/ASR/OCR/评论/行为轨迹等多源证据并处理冲突","优(5分)锚点":"证据使用准确，冲突判断合理","良(4分)锚点":"证据基本合理","及格(3分)锚点":"能出结论但证据不稳定","不及格(1-2分)锚点":"忽略关键证据或证据使用错误"},{"维度":"D8 业务可用性","权重":"5%","评测说明":"最终结果是否可直接支撑自动挂载/线索补齐/人群筛选","优(5分)锚点":"结果可直接用于业务","良(4分)锚点":"少量人工兜底即可用","及格(3分)锚点":"需要明显人工复核","不及格(1-2分)锚点":"不可直接使用"}],"ann_content":[{"字段/规则项":"is_auto_content","定义":"是否属于汽车主内容","判定标准":"视频主要讲汽车、车型、买车、卖车、养车、用车、政策、赛事等，可判‘是’；若汽车只作背景或同名误导，判‘否’；证据不足可判‘未知’","示例":"露营装备旁边停着理想L8→否；‘理想厨房收纳’→否"},{"字段/规则项":"is_sales_related","定义":"是否与购车/卖车决策相关","判定标准":"能帮助用户做购车/卖车决策的内容判‘是’，如优惠、探店、试驾、配置对比、金融方案、避坑、估价卖车；新闻、赛事、保养、技术科普、售后吐槽通常判‘否’","示例":"‘蔚来ES6优惠多少’→是；‘宝马3系保养多少钱’→否"},{"字段/规则项":"vehicle_type","定义":"新车/二手车/未知","判定标准":"视频明确讨论新车、二手车则对应标注；无法判断或混合场景则标‘未知’或‘待确认’","示例":"‘2021年宝马320Li个人一手’→二手车"},{"字段/规则项":"brand","定义":"品牌标准化","判定标准":"按标准品牌输出；如果只能确定品牌，则 series/model 可为 unknown；信息不足不要猜","示例":"‘问介M7’→品牌标准化为 AITO问界"},{"字段/规则项":"series","定义":"车系标准化","判定标准":"按标准车系输出；与品牌层级一致","示例":"‘宝马320Li’→ series=3系"},{"字段/规则项":"model","定义":"车型标准化","判定标准":"精确到可识别的车型/配置版本；若信息不足则 unknown","示例":"‘320Li’→ model=320Li；只出现‘奔驰E级’→ model=unknown"},{"字段/规则项":"多车型标注","定义":"一条内容支持多个实体","判定标准":"如果视频讨论/对比多款车，每款车都要单独抽取；同一车型去重","示例":"‘Model Y对比问界M7’→ 两个实体"},{"字段/规则项":"背景车规则","定义":"车仅作为背景时不标主实体","判定标准":"若画面里有车，但内容主旨不是汽车，原则上不标注","示例":"露营装备分享背景里有理想L8→不标"},{"字段/规则项":"unknown 规则","定义":"信息不足时不乱猜","判定标准":"当品牌、车系、车型任一层级证据不足时，可保留已确认部分，其他输出 unknown","示例":"只知道‘比亚迪’，不知道秦还是汉→ brand=比亚迪，series/model=unknown"},{"字段/规则项":"冲突处理","定义":"标题/ASR/OCR冲突时如何判定","判定标准":"优先综合信息量更充分、与主内容更一致的证据；必要时保留待确认","示例":"标题写海豹06，但 ASR/OCR 明确主讲秦L DM-i→以秦L DM-i为主"},{"字段/规则项":"别名/俗称","定义":"允许别名识别，但需标准化","判定标准":"俗称、缩写、黑话、错别字可识别，但最终输出标准实体；若只是泛称，不强行映射","示例":"56E→宝马5系/奔驰E级/奥迪A6L；‘老头乐’→不映射具体车型"},{"字段/规则项":"自动挂载候选","定义":"是否进入挂载候选池","判定标准":"一般要求 is_auto_content=是 且 is_sales_related=是；再结合用户意向侧判断是否展示 PLC","示例":"‘探店蔚来ES6’→可进入挂载候选池"}],"ann_intent":[{"等级/规则项":"高意向","定义":"短期内更可能提交汽车线索","判定标准":"出现具体车型/价格/落地价/试驾/门店/提车周期/优惠/估价卖车等强行为；或已点击/提交 PLC；或电话咨询/评论明确询问购买细节","示例":"搜索‘Model Y试驾’+ 点击PLC → 高"},{"等级/规则项":"中意向","定义":"有购车方向，但未形成强转化行为","判定标准":"看品类推荐、预算推荐、家用SUV推荐；少量价格搜索；开始接触具体车型但无点击/提交","示例":"搜索‘15万SUV推荐’→ 中"},{"等级/规则项":"低意向","定义":"只有泛兴趣或轻度浏览","判定标准":"只看资讯、车展、赛事、改装、保养内容；无具体车型搜索，无强互动","示例":"只看车展盘点 → 低"},{"等级/规则项":"排除类","定义":"不代表真实购车需求的账号/状态","判定标准":"汽车从业者、内容创作者、已购车用户、训练/素材导向浏览等","示例":"4S店销售培训内容消费 → 排除"},{"等级/规则项":"强正向信号","定义":"高意向核心依据","判定标准":"具体车型搜索、落地价/优惠/试驾/门店查询、PLC点击/提交、电话咨询、连续消费同一车型内容","示例":"‘问界M7优惠’+ ‘试驾预约’"},{"等级/规则项":"弱正向信号","定义":"倾向中意向","判定标准":"预算段/品类推荐、多条相关视频观看、收藏1次、一般性评论","示例":"看‘家用SUV推荐’视频 6 条"},{"等级/规则项":"负向/排除信号","定义":"不应判高意向","判定标准":"只看资讯/赛事/改装/养车；从业者培训；已购车后分享；创作者找素材","示例":"已提车后看改装分享"},{"等级/规则项":"边界样本处理","定义":"中/高边界如何标","判定标准":"如果已收敛到具体车型但缺少点击/提交/门店等强行为，可标‘中/高边界’，内部评测时建议先归中意向，再单独观察","示例":"搜索‘海豹06还是秦L’、收藏1条、无点击"},{"等级/规则项":"时间窗口","定义":"行为统计窗口建议","判定标准":"建议以近7天为主，必要时补充近30天趋势；离散旧行为权重降低","示例":"近7日连续搜索更有价值"}],"content":[{"用例ID":"CR-001","场景类型":"新车测评","优先级":"P0","难度":"低","输入标题":"2026款小米SU7 Max深度试驾，落地价到底值不值？","输入ASR/字幕":"今天实测小米SU7 Max，这台车现在下订大概多久提车，落地差不多三十万出头。","输入OCR":"小米SU7 Max / 试驾 / 30万+","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"小米\", \"series\": \"SU7\", \"model\": \"Max\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"基础正例；新车 + 明确车型 + 落地价/下订信息，适合挂载。"},{"用例ID":"CR-002","场景类型":"二手车售卖","优先级":"P0","难度":"低","输入标题":"2021年宝马320Li，个人一手，7万公里，支持检测","输入ASR/字幕":"这台宝马3系320Li，21年上牌，个人一手，没有重大事故，想要的私信。","输入OCR":"21年 / 320Li / 7万公里","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"二手车\", \"entities\": [{\"brand\": \"宝马\", \"series\": \"3系\", \"model\": \"320Li\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"二手车强正例；车型标准化测试（320Li→宝马3系320Li）。"},{"用例ID":"CR-003","场景类型":"车型对比","优先级":"P0","难度":"中","输入标题":"特斯拉Model Y对比问界M7，家用到底选谁？","输入ASR/字幕":"今天从空间、续航和智驾三个角度，对比一下Model Y和问界M7。","输入OCR":"Model Y VS 问界M7","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"特斯拉\", \"series\": \"Model Y\", \"model\": \"标准版/未知\"}, {\"brand\": \"AITO问界\", \"series\": \"M7\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"多车型样本；需要支持多实体抽取。"},{"用例ID":"CR-004","场景类型":"纯资讯","优先级":"P1","难度":"低","输入标题":"理想汽车发布最新财报，Q3营收创新高","输入ASR/字幕":"今天聊聊理想汽车最新财报和销量数据，对消费者买车没有直接决策建议。","输入OCR":"理想财报 / Q3","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [{\"brand\": \"理想\", \"series\": \"未知\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\"]}","评测点说明":"汽车内容但非购车决策内容，不应自动挂载。"},{"用例ID":"CR-005","场景类型":"维修保养","优先级":"P1","难度":"低","输入标题":"宝马3系烧机油怎么办？老师傅教你一招解决","输入ASR/字幕":"今天讲一下宝马3系如果出现烧机油和积碳，该怎么保养。","输入OCR":"烧机油 / 维修","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [{\"brand\": \"宝马\", \"series\": \"3系\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"维修/保养类应排除，不属于挂载目标。"},{"用例ID":"CR-006","场景类型":"赛车娱乐","优先级":"P2","难度":"低","输入标题":"F1 日本站高燃集锦，维斯塔潘太猛了","输入ASR/字幕":"这期给大家看F1比赛集锦，真的太刺激了。","输入OCR":"F1 / 日本站","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"汽车相关娱乐/赛事内容，不进入挂载候选池。"},{"用例ID":"CR-007","场景类型":"车型不明确","优先级":"P1","难度":"中","输入标题":"这台比亚迪开起来到底值不值？","输入ASR/字幕":"这车底盘挺整的，但具体是秦还是汉，视频里没有明确说。","输入OCR":"比亚迪","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车/未知\", \"entities\": [{\"brand\": \"比亚迪\", \"series\": \"未知\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是/待确认\", \"evidence\": [\"标题\", \"OCR\"]}","评测点说明":"只确定品牌，车系/车型应输出 unknown，不应乱猜。"},{"用例ID":"CR-008","场景类型":"标题与口播冲突","优先级":"P0","难度":"高","输入标题":"海豹06值不值得买？","输入ASR/字幕":"今天我们其实主要聊的是秦L DM-i，海豹06只是顺带提一下。","输入OCR":"秦L DM-i","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"比亚迪\", \"series\": \"秦L\", \"model\": \"DM-i\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"ASR\", \"OCR\"]}","评测点说明":"冲突样本；考查多源证据融合，不能只看标题。"},{"用例ID":"CR-009","场景类型":"二手车收车","优先级":"P1","难度":"中","输入标题":"二手奔驰C260L收车避坑，车商不会告诉你的秘密","输入ASR/字幕":"如果你准备买二手奔驰C级，尤其是C260L，一定要先查维修记录。","输入OCR":"奔驰 C260L / 二手车","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"二手车\", \"entities\": [{\"brand\": \"奔驰\", \"series\": \"C级\", \"model\": \"C260L\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"二手车购车决策内容，虽是避坑指南，仍属于决策相关。"},{"用例ID":"CR-010","场景类型":"背景车误导","优先级":"P1","难度":"高","输入标题":"露营装备清单分享","输入ASR/字幕":"今天主要给大家分享露营锅具和帐篷，旁边停了一台理想L8但不是重点。","输入OCR":"帐篷 / 露营桌","期望标准答案(JSON)":"{\"is_auto_content\": \"否/弱相关\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\"]}","评测点说明":"车只做背景，不应误识别为汽车内容主目标。"},{"用例ID":"CR-011","场景类型":"别名归一","优先级":"P0","难度":"中","输入标题":"老头乐到底能不能上路？","输入ASR/字幕":"很多人说老头乐，其实说的是低速电动车，不是具体标准车型。","输入OCR":"老头乐","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\"]}","评测点说明":"俗称/泛称，不应强行映射到具体品牌车系。"},{"用例ID":"CR-012","场景类型":"口语简称","优先级":"P0","难度":"中","输入标题":"BBA里我为什么最推荐3系？","输入ASR/字幕":"如果预算25到30万，我最推荐宝马3系，尤其320Li和325Li这两款。","输入OCR":"3系 / 320Li / 325Li","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"宝马\", \"series\": \"3系\", \"model\": \"320Li\"}, {\"brand\": \"宝马\", \"series\": \"3系\", \"model\": \"325Li\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"ASR\", \"OCR\", \"标题\"]}","评测点说明":"简称+BBA别名理解；多车型同车系。"},{"用例ID":"CR-013","场景类型":"OCR噪声","优先级":"P1","难度":"中","输入标题":"宋Pro DM-i真实油耗分享","输入ASR/字幕":"今天测比亚迪宋Pro DM-i的真实油耗。","输入OCR":"宋Pro D M1","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"比亚迪\", \"series\": \"宋Pro\", \"model\": \"DM-i\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\"]}","评测点说明":"OCR 错别字/字符识别错误，模型应有鲁棒性。"},{"用例ID":"CR-014","场景类型":"非汽车品牌歧义","优先级":"P1","难度":"高","输入标题":"理想厨房收纳分享","输入ASR/字幕":"今天聊理想生活里的厨房收纳，不是理想汽车。","输入OCR":"收纳 / 厨房","期望标准答案(JSON)":"{\"is_auto_content\": \"否\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"品牌同名歧义，防止误判为汽车内容。"},{"用例ID":"CR-015","场景类型":"门店探店","优先级":"P0","难度":"低","输入标题":"探店蔚来ES6，这个月优惠到底有多少？","输入ASR/字幕":"今天去门店看蔚来ES6，销售说现在金融方案和置换补贴都挺不错。","输入OCR":"ES6 / 优惠 / 置换补贴","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"蔚来\", \"series\": \"ES6\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"门店优惠、金融方案、置换补贴均属于强购车决策信号。"},{"用例ID":"CR-016","场景类型":"短句模糊","优先级":"P2","难度":"高","输入标题":"这车也太帅了吧","输入ASR/字幕":"兄弟们你们觉得这台怎么样？","输入OCR":"","期望标准答案(JSON)":"{\"is_auto_content\": \"未知\", \"is_sales_related\": \"未知\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否/待确认\", \"evidence\": []}","评测点说明":"信息严重不足，理应返回 unknown，不乱猜。"},{"用例ID":"CR-017","场景类型":"新能源 vs 油车","优先级":"P1","难度":"中","输入标题":"雅阁和汉DM-i谁更适合家用？","输入ASR/字幕":"如果你在纠结本田雅阁还是比亚迪汉DM-i，这期从空间和用车成本聊清楚。","输入OCR":"雅阁 VS 汉DM-i","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"本田\", \"series\": \"雅阁\", \"model\": \"未知\"}, {\"brand\": \"比亚迪\", \"series\": \"汉\", \"model\": \"DM-i\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"多品牌跨能源形态对比；多实体抽取。"},{"用例ID":"CR-018","场景类型":"贷款购车","优先级":"P0","难度":"低","输入标题":"首付5万提车，银河E8金融方案怎么算最划算？","输入ASR/字幕":"今天给大家算一下吉利银河E8贷款、月供和利息。","输入OCR":"首付5万 / 银河E8 / 月供","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"吉利银河\", \"series\": \"E8\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"金融方案类内容，对自动挂载价值高。"},{"用例ID":"CR-019","场景类型":"事故车避坑","优先级":"P1","难度":"低","输入标题":"买二手Model 3一定要查这几个地方","输入ASR/字幕":"二手特斯拉Model 3最怕的就是事故车和电池问题。","输入OCR":"Model 3 / 二手车","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"二手车\", \"entities\": [{\"brand\": \"特斯拉\", \"series\": \"Model 3\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"二手车购车避坑指南，属于决策相关。"},{"用例ID":"CR-020","场景类型":"售后吐槽","优先级":"P2","难度":"中","输入标题":"这家4S店售后太坑了","输入ASR/字幕":"主要吐槽售后保养和维修体验，不涉及买车决策。","输入OCR":"售后 / 维修","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"汽车相关但非购车/卖车相关。"},{"用例ID":"CR-021","场景类型":"评论补充关键信息","优先级":"P1","难度":"高","输入标题":"这台车到底值不值？","输入ASR/字幕":"今天聊一台热门纯电SUV。","输入OCR":"","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是/待确认\", \"vehicle_type\": \"新车\", \"entities\": [], \"auto_mount_candidate\": \"待确认\", \"evidence\": [\"评论区补充信息（若纳入）/ASR\"]}","评测点说明":"若项目后续纳入评论作为补充信号，可做扩展样本；当前主流程可标记待确认。"},{"用例ID":"CR-022","场景类型":"品牌+车系，缺model","优先级":"P1","难度":"低","输入标题":"奔驰E级现在还能买吗？","输入ASR/字幕":"如果你预算40万左右，奔驰E级依然是很稳的选择。","输入OCR":"奔驰E级","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"奔驰\", \"series\": \"E级\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"只到车系层级，model 应为 unknown。"},{"用例ID":"CR-023","场景类型":"错别字标题","优先级":"P1","难度":"中","输入标题":"问介M7值得买吗","输入ASR/字幕":"今天聊问界M7这台车值不值得买。","输入OCR":"M7","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"AITO问界\", \"series\": \"M7\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"ASR\", \"OCR\", \"标题\"]}","评测点说明":"品牌标题错别字；依赖 ASR/OCR 做纠错。"},{"用例ID":"CR-024","场景类型":"无车但谈政策","优先级":"P2","难度":"中","输入标题":"新能源购置税政策又变了","输入ASR/字幕":"这期聊政策，不具体推荐哪款车。","输入OCR":"购置税 / 新能源政策","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否/弱相关\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"汽车政策资讯，不直接进入挂载候选池。"},{"用例ID":"CR-025","场景类型":"直播切片卖车","优先级":"P0","难度":"低","输入标题":"今天直播间奥迪A4L现金优惠到底多少？","输入ASR/字幕":"刚刚销售说奥迪A4L现在能给到6万左右优惠，想上车的可以先了解。","输入OCR":"A4L / 现金优惠 / 直播切片","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"奥迪\", \"series\": \"A4L\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"优惠金额明确，典型强挂载内容。"},{"用例ID":"CR-026","场景类型":"车险理赔","优先级":"P2","难度":"低","输入标题":"出险后车险到底怎么报？","输入ASR/字幕":"这一期讲车险理赔流程和注意事项，不讨论买什么车。","输入OCR":"理赔 / 车险","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"养车/保险知识，非购车决策内容。"},{"用例ID":"CR-027","场景类型":"租车/网约车","优先级":"P2","难度":"中","输入标题":"跑网约车租比买更划算吗？","输入ASR/字幕":"今天聊网约车运营成本，不推荐具体家用购车。","输入OCR":"网约车 / 租车","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否/弱相关\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\"]}","评测点说明":"商业运营场景，不属于目标挂载内容。"},{"用例ID":"CR-028","场景类型":"平行进口车","优先级":"P1","难度":"高","输入标题":"平行进口丰田埃尔法能买吗？","输入ASR/字幕":"如果你考虑买平行进口埃尔法，这期聊清楚手续和价格。","输入OCR":"埃尔法 / 平行进口","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车/二手车待确认\", \"entities\": [{\"brand\": \"丰田\", \"series\": \"埃尔法\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"特殊交易形态；vehicle_type 可能存在边界，考查标注规范。"},{"用例ID":"CR-029","场景类型":"事故新闻","优先级":"P2","难度":"中","输入标题":"某品牌新能源车高速自燃，官方回应来了","输入ASR/字幕":"这期聊事故新闻和官方回应，不做购车推荐。","输入OCR":"事故 / 官方回应","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\"]}","评测点说明":"新闻事件类应排除。"},{"用例ID":"CR-030","场景类型":"配置讲解","优先级":"P1","难度":"低","输入标题":"问界M9这几个配置到底有没有必要选？","输入ASR/字幕":"今天主要聊问界M9的座椅、智驾和音响配置，适合准备下订的人参考。","输入OCR":"M9 / 配置怎么选","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"AITO问界\", \"series\": \"M9\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"配置选购建议，属于强购车决策内容。"},{"用例ID":"CR-031","场景类型":"跨品牌别名","优先级":"P1","难度":"高","输入标题":"56E怎么选？","输入ASR/字幕":"所谓56E就是宝马5系、奔驰E级和奥迪A6L，这期从商务家用角度聊一下。","输入OCR":"56E","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"宝马\", \"series\": \"5系\", \"model\": \"未知\"}, {\"brand\": \"奔驰\", \"series\": \"E级\", \"model\": \"未知\"}, {\"brand\": \"奥迪\", \"series\": \"A6L\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"ASR\", \"标题\"]}","评测点说明":"行业别名/黑话理解；多实体抽取。"},{"用例ID":"CR-032","场景类型":"截图带价目表","优先级":"P0","难度":"高","输入标题":"本周比亚迪王朝网优惠总表","输入ASR/字幕":"这张表里重点看秦L、海豹06和宋Pro的优惠情况。","输入OCR":"秦L 0.8万 / 海豹06 0.6万 / 宋Pro 1.1万","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"比亚迪\", \"series\": \"秦L\", \"model\": \"未知\"}, {\"brand\": \"比亚迪\", \"series\": \"海豹06\", \"model\": \"未知\"}, {\"brand\": \"比亚迪\", \"series\": \"宋Pro\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"OCR 表格信息利用；多实体批量抽取。"},{"用例ID":"CR-033","场景类型":"女车主分享但涉及选购","优先级":"P1","难度":"低","输入标题":"女生第一台车，海豚和缤果到底怎么选？","输入ASR/字幕":"如果你是女生第一台代步车，在海豚和缤果之间纠结，可以重点看续航和停车难度。","输入OCR":"海豚 VS 缤果","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"比亚迪\", \"series\": \"海豚\", \"model\": \"未知\"}, {\"brand\": \"五菱\", \"series\": \"缤果\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"用户画像型选购对比，仍应作为挂载候选。"},{"用例ID":"CR-034","场景类型":"无品牌纯参数讨论","优先级":"P2","难度":"中","输入标题":"800V平台到底有啥用？","输入ASR/字幕":"这一期纯讲技术原理，不推荐具体车型。","输入OCR":"800V / 技术解析","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"否\", \"vehicle_type\": \"未知\", \"entities\": [], \"auto_mount_candidate\": \"否\", \"evidence\": [\"标题\", \"ASR\", \"OCR\"]}","评测点说明":"技术科普，不适合挂载。"},{"用例ID":"CR-035","场景类型":"ASR错识别需要纠偏","优先级":"P1","难度":"中","输入标题":"零跑C11增程能买吗？","输入ASR/字幕":"今天聊领跑C11增程版。","输入OCR":"零跑 C11 增程","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"新车\", \"entities\": [{\"brand\": \"零跑\", \"series\": \"C11\", \"model\": \"增程版\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"标题\", \"OCR\"]}","评测点说明":"ASR 错别字（领跑→零跑）需纠偏。"},{"用例ID":"CR-036","场景类型":"内容主体变更","优先级":"P1","难度":"高","输入标题":"二手车行情大盘点","输入ASR/字幕":"前半段讲行情，后半段重点分析二手雅阁和凯美瑞怎么选。","输入OCR":"雅阁 / 凯美瑞 / 二手车","期望标准答案(JSON)":"{\"is_auto_content\": \"是\", \"is_sales_related\": \"是\", \"vehicle_type\": \"二手车\", \"entities\": [{\"brand\": \"本田\", \"series\": \"雅阁\", \"model\": \"未知\"}, {\"brand\": \"丰田\", \"series\": \"凯美瑞\", \"model\": \"未知\"}], \"auto_mount_candidate\": \"是\", \"evidence\": [\"ASR\", \"OCR\"]}","评测点说明":"前后主题不同，需抓住真正决策重点。"}],"intent":[{"用例ID":"UI-001","场景类型":"强购车意向","优先级":"P0","难度":"低","用户行为摘要":"近7日连续搜索“小米SU7落地价”“SU7 Max试驾”“小米SU7提车周期”；观看 8 条 SU7 评测视频并收藏 2 条；点击 1 次 PLC，未提交。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"连续具体车型搜索\", \"多次观看同一车型\", \"出现PLC点击行为\"]}","评测点说明":"典型高意向正例。"},{"用例ID":"UI-002","场景类型":"已提交线索","优先级":"P0","难度":"低","用户行为摘要":"近3日看了 5 条问界M7对比视频，搜索“问界M7优惠”，并已提交 1 次汽车 PLC。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"已提交PLC\", \"明确车型搜索\", \"高频相关内容消费\"]}","评测点说明":"已提交属于最强正向信号。"},{"用例ID":"UI-003","场景类型":"试驾导向","优先级":"P0","难度":"低","用户行为摘要":"用户搜索“蔚来ES6试驾预约”“门店在哪”，浏览 3 条探店视频，并在评论区询问‘现在有置换补贴吗’。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"试驾/门店查询\", \"优惠咨询\", \"探店行为\"]}","评测点说明":"门店、试驾、补贴属于强购车信号。"},{"用例ID":"UI-004","场景类型":"泛兴趣用户","优先级":"P1","难度":"低","用户行为摘要":"近7日主要看汽车新闻、销量榜、上海车展盘点视频，没有搜索具体车型，也没有点击 PLC。","期望标准答案(JSON)":"{\"intent_level\": \"低\", \"why\": [\"泛资讯消费\", \"无具体车型行为\", \"无深度转化动作\"]}","评测点说明":"汽车兴趣≠购车意向。"},{"用例ID":"UI-005","场景类型":"中意向","优先级":"P1","难度":"低","用户行为摘要":"连续看 6 条‘15万SUV推荐’视频，收藏 1 条，搜索‘家用SUV推荐’，但未搜索具体车型。","期望标准答案(JSON)":"{\"intent_level\": \"中\", \"why\": [\"有购买方向探索\", \"尚未聚焦具体车型\", \"无更强转化动作\"]}","评测点说明":"预算/品类探索阶段，通常判为中意向。"},{"用例ID":"UI-006","场景类型":"行业从业者","优先级":"P1","难度":"高","用户行为摘要":"账号持续浏览 4S 店运营、汽车销售培训、直播卖车技巧内容，每天停留时间很长，但几乎不搜索购车信息。","期望标准答案(JSON)":"{\"intent_level\": \"低/排除\", \"why\": [\"更像行业从业行为\", \"非真实购车需求\"]}","评测点说明":"需要和职业/创作者行为做区分。"},{"用例ID":"UI-007","场景类型":"二手车高意向","优先级":"P0","难度":"中","用户行为摘要":"近5日多次搜索‘二手Model 3能买吗’‘二手特斯拉避坑’，看了 7 条事故车检测视频，并咨询‘电池还能质保吗’。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"二手车具体车型搜索\", \"连续消费相关内容\", \"明确咨询决策问题\"]}","评测点说明":"二手车场景高意向样本。"},{"用例ID":"UI-008","场景类型":"低意向娱乐型","优先级":"P2","难度":"低","用户行为摘要":"主要看 F1 集锦、漂移视频和改装视频，偶尔点赞，没有搜索购车信息。","期望标准答案(JSON)":"{\"intent_level\": \"低\", \"why\": [\"娱乐消费\", \"无购车决策行为\"]}","评测点说明":"汽车娱乐内容不应误判高意向。"},{"用例ID":"UI-009","场景类型":"中高边界","优先级":"P1","难度":"高","用户行为摘要":"搜索‘海豹06还是秦L’，看了 4 条对比视频，收藏 1 条，未点击 PLC。","期望标准答案(JSON)":"{\"intent_level\": \"中/高边界\", \"why\": [\"出现具体车型对比\", \"已有决策收敛趋势\", \"缺少点击/提交等强转化动作\"]}","评测点说明":"边界样本，可用于标注规范校准。"},{"用例ID":"UI-010","场景类型":"养车用户","优先级":"P1","难度":"中","用户行为摘要":"最近都在看‘宝马3系保养多少钱’‘轮胎多久换一次’，无购车搜索。","期望标准答案(JSON)":"{\"intent_level\": \"低\", \"why\": [\"偏养车/保养行为\", \"并非购车决策\"]}","评测点说明":"老车主内容与购车行为区分。"},{"用例ID":"UI-011","场景类型":"已明确预算与车型","优先级":"P0","难度":"低","用户行为摘要":"搜索‘20万落地买什么车’后，又连续搜索‘雅阁优惠’‘雅阁混动落地’‘雅阁试驾’，并点开 2 次 PLC。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"预算明确\", \"具体车型连续搜索\", \"有PLC点击\"]}","评测点说明":"高意向正例。"},{"用例ID":"UI-012","场景类型":"内容创作者","优先级":"P2","难度":"高","用户行为摘要":"账号日均浏览 100+ 汽车视频，内容涵盖各种品牌，搜索多为‘今天拍什么车’‘新车素材’，发布过汽车内容。","期望标准答案(JSON)":"{\"intent_level\": \"低/排除\", \"why\": [\"创作者特征明显\", \"不代表真实购车意向\"]}","评测点说明":"创作者账号排除。"},{"用例ID":"UI-013","场景类型":"中意向价格探索","优先级":"P1","难度":"中","用户行为摘要":"搜索‘比亚迪宋Pro优惠多少’‘首付5万月供多少’，但只看了 2 条视频，没有收藏/点击。","期望标准答案(JSON)":"{\"intent_level\": \"中\", \"why\": [\"出现价格和金融方案搜索\", \"行为强度还不够高\"]}","评测点说明":"价格探索但交互深度一般。"},{"用例ID":"UI-014","场景类型":"高意向+门店","优先级":"P0","难度":"低","用户行为摘要":"搜索‘附近特斯拉门店’‘Model Y周末试驾’，浏览探店视频 3 条，并在评论中问‘现在提车多久’。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"门店/试驾行为\", \"明确提车周期咨询\"]}","评测点说明":"高意向强特征。"},{"用例ID":"UI-015","场景类型":"低意向泛对比","优先级":"P2","难度":"低","用户行为摘要":"看了几条‘10万级轿车推荐’视频，但没有搜索、收藏、评论或点击任何组件。","期望标准答案(JSON)":"{\"intent_level\": \"低\", \"why\": [\"仅轻度浏览\", \"缺少搜索与转化信号\"]}","评测点说明":"低意向负例。"},{"用例ID":"UI-016","场景类型":"中意向家庭换车","优先级":"P1","难度":"低","用户行为摘要":"连续看 5 条‘家庭换车推荐’‘6座SUV推荐’视频，搜索‘理想L8空间’，收藏 1 条。","期望标准答案(JSON)":"{\"intent_level\": \"中\", \"why\": [\"有明确家庭场景需求\", \"开始接触具体车型\", \"但转化动作不足\"]}","评测点说明":"中意向正例。"},{"用例ID":"UI-017","场景类型":"高意向多信号叠加","优先级":"P0","难度":"低","用户行为摘要":"用户一周内搜索‘奔驰E级优惠’‘奔驰E级落地’，看了 6 条E级探店视频，点击 PLC 2 次，并拨打咨询电话。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"具体车型+优惠/落地价\", \"多次点击PLC\", \"电话咨询\"]}","评测点说明":"强高意向极值样本。"},{"用例ID":"UI-018","场景类型":"已购车用户","优先级":"P2","难度":"高","用户行为摘要":"评论‘我上个月刚提了海豹06’，之后主要看提车作业和改装分享。","期望标准答案(JSON)":"{\"intent_level\": \"低/排除\", \"why\": [\"已购车信号\", \"后续行为更偏车主内容\"]}","评测点说明":"已购车用户不应继续被强触达。"},{"用例ID":"UI-019","场景类型":"预算探索到车型收敛","优先级":"P1","难度":"中","用户行为摘要":"前3天一直看‘30万SUV推荐’，后2天开始连续搜索‘理想L7优惠’‘理想L7试驾’，但还没有点击 PLC。","期望标准答案(JSON)":"{\"intent_level\": \"中/高边界\", \"why\": [\"从泛需求开始收敛到具体车型\", \"尚缺组件交互或提交信号\"]}","评测点说明":"典型从中意向向高意向过渡样本。"},{"用例ID":"UI-020","场景类型":"卖车意向","优先级":"P1","难度":"高","用户行为摘要":"搜索‘二手宝马3系卖多少钱’‘卖车估价’，浏览 5 条收车/卖车流程视频。","期望标准答案(JSON)":"{\"intent_level\": \"中/高（卖车）\", \"why\": [\"明确卖车估价搜索\", \"连续卖车流程内容消费\"]}","评测点说明":"如果业务把卖车内容也纳入 is_sales_related，应保留此类样本。"},{"用例ID":"UI-021","场景类型":"金融方案驱动","优先级":"P1","难度":"中","用户行为摘要":"连续搜索‘零首付买车靠谱吗’‘海豚月供多少’‘购车分期利息怎么算’，并看了 4 条金融方案视频。","期望标准答案(JSON)":"{\"intent_level\": \"中\", \"why\": [\"有明显购车金融关注\", \"尚未收敛到稳定单一车型\"]}","评测点说明":"金融兴趣不一定直接是高意向。"},{"用例ID":"UI-022","场景类型":"店端从业干扰","优先级":"P2","难度":"高","用户行为摘要":"白天频繁查看‘本周成交技巧’‘客户邀约话术’，晚上偶尔看几条雅阁探店视频，但从不搜索落地价或试驾。","期望标准答案(JSON)":"{\"intent_level\": \"低/排除\", \"why\": [\"从业行为占主导\", \"缺少真实购车信号\"]}","评测点说明":"从业者混合行为样本。"},{"用例ID":"UI-023","场景类型":"家庭共决策高意向","优先级":"P0","难度":"低","用户行为摘要":"近一周搜索‘奶爸车推荐’后，连续搜索‘问界M7空间’‘理想L8二排体验’‘哪款6座SUV更适合家庭’，并在评论区问‘带老人坐舒服吗’。","期望标准答案(JSON)":"{\"intent_level\": \"高\", \"why\": [\"家庭决策场景明确\", \"具体车型连续搜索\", \"强需求问法\"]}","评测点说明":"场景型高意向正例。"},{"用例ID":"UI-024","场景类型":"车展兴趣用户","优先级":"P2","难度":"低","用户行为摘要":"只在车展期间集中看了很多新车亮相视频，点赞较多，但没有后续搜索、收藏或点击组件。","期望标准答案(JSON)":"{\"intent_level\": \"低\", \"why\": [\"阶段性围观行为\", \"无持续购车决策动作\"]}","评测点说明":"热点围观不等于购车意向。"}]};
+</script>
+
   <script>
     const revealItems = document.querySelectorAll(".reveal");
     const revealObserver = new IntersectionObserver((entries) => {
@@ -789,7 +990,7 @@
       };
 
       head.addEventListener("click", (event) => {
-        if (event.target.closest("a")) return;
+        if (event.target.closest("a, button")) return;
         toggleCase();
       });
       head.addEventListener("keydown", (event) => {
@@ -816,6 +1017,125 @@
         step.classList.add("is-active");
         const detail = document.querySelector(".flow-detail");
         if (detail) detail.textContent = "> " + step.getAttribute("data-detail");
+      });
+    });
+
+    /* ===== 评测集弹窗 ===== */
+    const evalModal = document.getElementById("eval-modal");
+    const esc = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    const pill = (p) => {
+      const cls = { "P0": "p0", "P1": "p1", "P2": "p2" }[String(p).toUpperCase()] || "";
+      return '<span class="eval-pill ' + cls + '">' + esc(p) + "</span>";
+    };
+
+    function renderContentPanel() {
+      const rows = EVAL_DATA.content.map((r) =>
+        "<tr>" +
+          '<td class="id">' + esc(r["用例ID"]) + "</td>" +
+          "<td>" + esc(r["场景类型"]) + "</td>" +
+          "<td>" + pill(r["优先级"]) + "</td>" +
+          "<td>" + esc(r["难度"]) + "</td>" +
+          "<td>" + esc(r["输入标题"]) + "</td>" +
+          "<td>" + esc(r["输入ASR/字幕"]) + "</td>" +
+          "<td>" + esc(r["输入OCR"]) + "</td>" +
+          '<td class="eval-json">' + esc(r["期望标准答案(JSON)"]) + "</td>" +
+          "<td>" + esc(r["评测点说明"]) + "</td>" +
+        "</tr>"
+      ).join("");
+      document.getElementById("eval-panel-content").innerHTML =
+        '<p class="eval-note"><strong>场景覆盖：</strong>新车测评 / 二手车售卖 / 车型对比 / 纯资讯 / 技术科普 / 售后 / ASR 纠偏 / 内容主体变更等；字段含 is_auto_content、is_sales_related、vehicle_type、brand、series、model。样本结构：正例 / 负例 / 边界难例 ≈ 4:3:3。</p>' +
+        '<div class="eval-table-wrap"><table class="eval-table"><thead><tr>' +
+        "<th>用例ID</th><th>场景类型</th><th>优先级</th><th>难度</th><th>输入标题</th><th>输入 ASR/字幕</th><th>输入 OCR</th><th>期望标准答案 (JSON)</th><th>评测点说明</th>" +
+        "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+    }
+
+    function renderIntentPanel() {
+      const rows = EVAL_DATA.intent.map((r) =>
+        "<tr>" +
+          '<td class="id">' + esc(r["用例ID"]) + "</td>" +
+          "<td>" + esc(r["场景类型"]) + "</td>" +
+          "<td>" + pill(r["优先级"]) + "</td>" +
+          "<td>" + esc(r["难度"]) + "</td>" +
+          "<td>" + esc(r["用户行为摘要"]) + "</td>" +
+          '<td class="eval-json">' + esc(r["期望标准答案(JSON)"]) + "</td>" +
+          "<td>" + esc(r["评测点说明"]) + "</td>" +
+        "</tr>"
+      ).join("");
+      document.getElementById("eval-panel-intent").innerHTML =
+        '<p class="eval-note"><strong>意向分级：</strong>高 / 中 / 低 / 排除四类 + 中-高边界处理；覆盖已提交线索、试驾导向、金融方案、家庭共决策、从业者干扰、车展围观等场景。</p>' +
+        '<div class="eval-table-wrap"><table class="eval-table"><thead><tr>' +
+        "<th>用例ID</th><th>场景类型</th><th>优先级</th><th>难度</th><th>用户行为摘要</th><th>期望标准答案 (JSON)</th><th>评测点说明</th>" +
+        "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+    }
+
+    function renderScoringPanel() {
+      const rows = EVAL_DATA.scoring.map((r) =>
+        "<tr>" +
+          '<td class="id">' + esc(r["维度"]) + "</td>" +
+          "<td>" + esc(r["权重"]) + "</td>" +
+          "<td>" + esc(r["评测说明"]) + "</td>" +
+          "<td>" + esc(r["优(5分)锚点"]) + "</td>" +
+          "<td>" + esc(r["良(4分)锚点"]) + "</td>" +
+          "<td>" + esc(r["及格(3分)锚点"]) + "</td>" +
+          "<td>" + esc(r["不及格(1-2分)锚点"]) + "</td>" +
+        "</tr>"
+      ).join("");
+      document.getElementById("eval-panel-scoring").innerHTML =
+        '<p class="eval-note"><strong>权重设计：</strong>字段准确性 25% 权重最高，直接决定业务可用性；格式规范仅 10%，避免「格式好但字段错」被高估。</p>' +
+        '<div class="eval-table-wrap"><table class="eval-table"><thead><tr>' +
+        "<th>维度</th><th>权重</th><th>评测说明</th><th>优 (5分)</th><th>良 (4分)</th><th>及格 (3分)</th><th>不及格 (1-2分)</th>" +
+        "</tr></thead><tbody>" + rows + "</tbody></table></div>";
+    }
+
+    function renderSpecPanel() {
+      const kv = (rows) =>
+        rows.map((r) =>
+          '<div class="eval-kv" style="margin-bottom:10px">' +
+            '<div class="k">字段 / 规则项</div><div class="v">' + esc(r["字段/规则项"]) + "</div>" +
+            '<div class="k">定义</div><div class="v">' + esc(r["定义"]) + "</div>" +
+            '<div class="k">判定标准</div><div class="v">' + esc(r["判定标准"]) + "</div>" +
+            '<div class="k">示例</div><div class="v">' + esc(r["示例"]) + "</div>" +
+          "</div>"
+        ).join("");
+      document.getElementById("eval-panel-spec").innerHTML =
+        "<h4 style='margin:4px 0 10px'>标注规范 · 内容识别</h4>" + kv(EVAL_DATA.ann_content) +
+        "<h4 style='margin:20px 0 10px'>标注规范 · 用户意向</h4>" + kv(EVAL_DATA.ann_intent);
+    }
+
+    let evalRendered = false;
+    function openEval() {
+      if (!evalRendered) {
+        renderContentPanel(); renderIntentPanel(); renderScoringPanel(); renderSpecPanel();
+        evalRendered = true;
+      }
+      evalModal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeEval() {
+      evalModal.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("[data-open-eval]").forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openEval();
+      });
+    });
+    document.querySelectorAll("[data-close-eval]").forEach((btn) => btn.addEventListener("click", closeEval));
+    evalModal.addEventListener("click", (event) => {
+      if (event.target === evalModal) closeEval();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && evalModal.classList.contains("is-open")) closeEval();
+    });
+
+    document.querySelectorAll("[data-eval-tab]").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll("[data-eval-tab]").forEach((item) => item.classList.remove("is-active"));
+        document.querySelectorAll(".eval-panel").forEach((item) => item.classList.remove("is-active"));
+        tab.classList.add("is-active");
+        document.getElementById("eval-panel-" + tab.getAttribute("data-eval-tab")).classList.add("is-active");
       });
     });
   </script>
