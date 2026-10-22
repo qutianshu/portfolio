@@ -1,0 +1,61 @@
+﻿GitHub Pages 部署说明（网页手动方式）
+======================================
+
+你的代码位置：D:\作品集网站
+已完成：index.html + assets/（背景图与运行截图），本地 git 仓库已初始化并提交（main 分支）。
+
+需要上传到 GitHub 的内容（只传这 3 项）：
+  1. index.html
+  2. assets 文件夹（内含 hero-bg.png 和 proof/ 两张截图，层级不能丢）
+  3. .gitignore（可选，传不传都不影响网站显示）
+
+【第一步】创建仓库
+  1. 打开 https://github.com 并登录
+  2. 右上角 + → New repository
+  3. Repository name 填：<你的用户名>.github.io
+     注意：必须与你的 GitHub 用户名完全一致（建议小写），这是 GitHub Pages
+     用户主页的硬性要求，否则不会自动成为主页
+  4. 可见性选 Public
+  5. 不要勾选 "Add a README file" 和 ".gitignore"（避免与上传冲突）
+  6. 点击 Create repository
+
+【第二步】上传文件
+  1. 进入刚建好的仓库页面 → Add file → Upload files
+  2. 把 D:\作品集网站 里的 index.html 和 assets 文件夹拖进上传区
+     （GitHub 网页支持拖拽文件夹，会自动保留 assets/proof/ 的子目录结构）
+  3. 页面下方 Commit changes → 直接点 Commit
+
+【第三步】开启 GitHub Pages
+  1. 仓库页 → Settings → 左侧 Pages
+  2. Build and deployment → Source 选 "Deploy from a branch"
+  3. Branch 选 main，文件夹选 / (root) → 点 Save
+  4. 等待 1-2 分钟，刷新页面，顶部会出现：
+     "Your site is live at https://<你的用户名>.github.io"
+
+【第四步】验证线上效果
+  打开 https://<你的用户名>.github.io，检查：
+  - 首屏背景图（深大天际线）是否正常压暗显示
+  - 四个指标数字（2 / 98% / 3000+ / 90%+）
+  - 项目案例卡片：点击卡片可展开，Pipeline 11 个节点可逐个点击看说明，
+    Tab 六段可切换，两张运行截图可打开
+  - 联系区邮件按钮可唤起邮件客户端
+
+【之后改内容怎么办】
+  方式 A（网页）：重新拖入覆盖 index.html / assets 的同名文件即可
+  方式 B（命令行，推荐，改起来快）：
+    git add -A
+    git commit -m "update"
+    git push（首次推送前需先配置远程仓库或登录凭据）
+
+【可选】命令行一键部署（如果想以后全自动）
+  1. 安装 GitHub CLI：winget install --id GitHub.cli
+  2. gh auth login   （浏览器授权一次）
+  3. gh repo create <你的用户名>.github.io --public --source D:\作品集网站 --push
+  4. gh api -X POST "repos/<你的用户名>/<你的用户名>.github.io/pages" -f "source[branch]=main" -f "source[path]=/"
+
+【隐私与注意事项】
+  - 公网版已按约定不包含手机号，只保留学校邮箱
+  - reference_index.html（参考站源码）和 .workbuddy/（项目记忆）已通过
+    .gitignore 排除，不会被上传到公网
+  - 部署完成后若想把 GitHub 链接加到网页联系区，把用户名告诉我，
+    我会改好并让你重新上传 index.html
